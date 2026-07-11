@@ -81,15 +81,16 @@ cards.forEach((card) => {
 // al cruzar el breakpoint, resetear estados para no mezclar ambos modos
 desktopMq.addEventListener("change", closeProducts);
 
-/* ---- "Cotizar este producto": pre-selecciona en el formulario ----
+/* ---- "Cotizar este producto": pre-marca el checkbox en el formulario ----
    Delegado en document porque los botones del panel compartido son clones. */
-const selectProducto = document.getElementById("fProducto");
+const productChecks = document.getElementById("productChecks");
 
 document.addEventListener("click", (e) => {
   const btn = e.target.closest(".btn-quote");
   if (!btn) return;
-  selectProducto.value = btn.dataset.quote;
-  selectProducto.classList.remove("is-invalid");
+  const check = productChecks.querySelector(`input[value="${btn.dataset.quote}"]`);
+  if (check) check.checked = true;
+  productChecks.classList.remove("is-invalid");
   // directo al formulario (no al inicio de la sección) para que se vea el producto elegido
   document.getElementById("contactForm").scrollIntoView({ behavior: "smooth", block: "start" });
   setTimeout(() => document.getElementById("fNombre").focus({ preventScroll: true }), 600);
@@ -103,19 +104,19 @@ form.addEventListener("submit", (e) => {
 
   const nombre = form.nombre.value.trim();
   const telefono = form.telefono.value.trim();
-  const producto = form.producto.value;
+  const productos = [...productChecks.querySelectorAll("input:checked")].map((c) => c.value);
   const mensaje = form.mensaje.value.trim();
 
   let valido = true;
   form.nombre.classList.toggle("is-invalid", !nombre);
-  form.producto.classList.toggle("is-invalid", !producto);
+  productChecks.classList.toggle("is-invalid", !productos.length);
   if (!nombre) { form.nombre.focus(); valido = false; }
-  else if (!producto) { form.producto.focus(); valido = false; }
+  else if (!productos.length) { productChecks.querySelector("input").focus(); valido = false; }
   if (!valido) return;
 
   const lineas = [
     `¡Hola Kahome! 👋 Soy ${nombre}.`,
-    `Me interesa: ${producto}.`,
+    `Me interesa: ${productos.join(", ")}.`,
     mensaje && `Detalles: ${mensaje}`,
     telefono && `Mi teléfono: ${telefono}`,
     "¿Me pueden dar más información y una cotización?",
@@ -124,9 +125,10 @@ form.addEventListener("submit", (e) => {
   window.open(waUrl(lineas.join("\n")), "_blank", "noopener");
 });
 
-form.querySelectorAll("input, select").forEach((el) =>
+form.querySelectorAll("input:not([type=checkbox])").forEach((el) =>
   el.addEventListener("input", () => el.classList.remove("is-invalid"))
 );
+productChecks.addEventListener("change", () => productChecks.classList.remove("is-invalid"));
 
 /* ---- Reveal on scroll ---- */
 const observer = new IntersectionObserver(

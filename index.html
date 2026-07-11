@@ -98,9 +98,9 @@
   <section class="hero" id="inicio">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow reveal">Profesionales en decoración · Mérida, Yucatán</p>
-        <h1 class="reveal">Transformamos tus espacios en <em>lugares espectaculares</em></h1>
-        <p class="hero-sub reveal">Fabricamos e instalamos cortinas, persianas, muros, pisos y más — todo a la medida de tu hogar o negocio, con asesoría de principio a fin.</p>
+        <p class="eyebrow reveal">Profesionales en decoración</p>
+        <h1 class="reveal">Cortinas, persianas y acabados <em>a la medida</em> en Mérida</h1>
+        <p class="hero-sub reveal">Transformamos tus espacios en lugares espectaculares. Cuéntanos tu proyecto y te acompañamos de la idea a la instalación.</p>
         <div class="hero-actions reveal">
           <a href="#contacto" class="btn btn-primary btn-lg" data-wa-cta>Cotización gratis por WhatsApp</a>
           <a href="#productos" class="btn btn-ghost btn-lg">Ver productos</a>
@@ -301,6 +301,56 @@
       <div class="product-detail" id="productDetail" aria-live="polite">
         <div class="product-detail-inner"></div>
       </div>
+
+      <!-- Comparativa rápida de telas para ventanas -->
+      <div class="compare reveal">
+        <h3>¿Screen, blackout o sheer elegance? Compara y elige</h3>
+        <div class="compare-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th scope="col"><span class="sr-only">Característica</span></th>
+                <th scope="col">Screen</th>
+                <th scope="col">Blackout</th>
+                <th scope="col">Sheer elegance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Luz</th>
+                <td>Tamizada, sin reflejos molestos</td>
+                <td>Oscuridad total</td>
+                <td>Regulable: de luz suave a sombra</td>
+              </tr>
+              <tr>
+                <th scope="row">Calor</th>
+                <td>Filtra el sol y los rayos UV</td>
+                <td>Máximo bloqueo térmico</td>
+                <td>Bloqueo medio, ajustable</td>
+              </tr>
+              <tr>
+                <th scope="row">Privacidad</th>
+                <td>De día sí; de noche parcial</td>
+                <td>Total, día y noche</td>
+                <td>Regulable con las franjas</td>
+              </tr>
+              <tr>
+                <th scope="row">Vista al exterior</th>
+                <td>Se conserva</td>
+                <td>No hay</td>
+                <td>Parcial, al abrir las franjas</td>
+              </tr>
+              <tr>
+                <th scope="row">Ideal para</th>
+                <td>Salas, oficinas y ventanales</td>
+                <td>Recámaras y salas de TV</td>
+                <td>Salas y comedores elegantes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="compare-note">¿Aún con dudas? <a href="#" data-wa-link>Escríbenos por WhatsApp</a> y te asesoramos sin costo.</p>
+      </div>
     </div>
   </section>
 
@@ -467,6 +517,7 @@
 
         <ul class="contact-channels reveal">
           <li><a href="#" data-wa-link class="channel channel--wa">WhatsApp</a></li>
+          <li><a href="tel:+529993929306" class="channel">Llamar · 999 392 9306</a></li>
           <li><a href="https://www.facebook.com/KaHomeMX/" target="_blank" rel="noopener" class="channel">Facebook</a></li>
           <li><a href="https://www.instagram.com/kahomemx/" target="_blank" rel="noopener" class="channel">Instagram</a></li>
           <li><a href="https://maps.app.goo.gl/dJadkimDuMhJVmNC7" target="_blank" rel="noopener" class="channel">Google Maps</a></li>
@@ -483,25 +534,24 @@
           <label for="fTelefono">Teléfono</label>
           <input type="tel" id="fTelefono" name="telefono" placeholder="999 123 4567" autocomplete="tel">
         </div>
-        <div class="field">
-          <label for="fProducto">Producto de interés</label>
-          <select id="fProducto" name="producto" required>
-            <option value="" disabled selected>Elige un producto…</option>
-            <option>Cortinas</option>
-            <option>Persianas</option>
-            <option>Muro PVC tipo mármol</option>
-            <option>Lambrín</option>
-            <option>Pasto artificial</option>
-            <option>Piso PVC</option>
-            <option>Varios / no estoy seguro</option>
-          </select>
-        </div>
+        <fieldset class="field field--checks">
+          <legend>Productos de interés <span class="legend-hint">(elige uno o varios)</span></legend>
+          <div class="check-grid" id="productChecks">
+            <label class="check-pill"><input type="checkbox" name="producto" value="Cortinas"><span>Cortinas</span></label>
+            <label class="check-pill"><input type="checkbox" name="producto" value="Persianas"><span>Persianas</span></label>
+            <label class="check-pill"><input type="checkbox" name="producto" value="Muro PVC tipo mármol"><span>Muro PVC tipo mármol</span></label>
+            <label class="check-pill"><input type="checkbox" name="producto" value="Lambrín"><span>Lambrín</span></label>
+            <label class="check-pill"><input type="checkbox" name="producto" value="Pasto artificial"><span>Pasto artificial</span></label>
+            <label class="check-pill"><input type="checkbox" name="producto" value="Piso PVC"><span>Piso PVC</span></label>
+            <label class="check-pill"><input type="checkbox" name="producto" value="Aún no lo decido"><span>Aún no lo decido</span></label>
+          </div>
+        </fieldset>
         <div class="field">
           <label for="fMensaje">Cuéntanos más</label>
           <textarea id="fMensaje" name="mensaje" rows="4" placeholder="Ej. Necesito persianas para 3 ventanas de mi sala…"></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar por WhatsApp</button>
-        <p class="form-note">Al enviar se abrirá WhatsApp con tu mensaje listo. No guardamos tus datos.</p>
+        <p class="form-note">Al enviar se abrirá WhatsApp con tu mensaje listo — ahí puedes adjuntar fotos de tu espacio. No guardamos tus datos.</p>
       </form>
 
       <div class="location reveal" id="ubicacion">
@@ -532,6 +582,10 @@
     <p class="footer-copy">© <span id="year">2026</span> Kahome Decoración · Mérida, Yucatán</p>
   </div>
 </footer>
+
+<a href="tel:+529993929306" class="call-float" aria-label="Llámanos: 999 392 9306">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg>
+</a>
 
 <a href="#" class="wa-float" data-wa-link aria-label="Escríbenos por WhatsApp">
   <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.33 4.95L2 22l5.3-1.39c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01A9.84 9.84 0 0 0 12.04 2zm0 18.15h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.25-.64.8-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
