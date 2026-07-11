@@ -39,21 +39,38 @@ navToggle.addEventListener("click", () => {
 });
 nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
 
-/* ---- Productos: tarjetas expandibles (solo una abierta a la vez) ---- */
+/* ---- Productos ----
+   Móvil: acordeón dentro de cada tarjeta.
+   Pantalla grande: las tarjetas no cambian de tamaño; los subproductos
+   se muestran en un panel compartido debajo del grid. */
 const cards = document.querySelectorAll(".product-card");
+const productDetail = document.getElementById("productDetail");
+const productDetailInner = productDetail.querySelector(".product-detail-inner");
+const desktopMq = window.matchMedia("(min-width: 640px)");
+
+const closeProducts = () => {
+  cards.forEach((c) => {
+    c.classList.remove("is-open", "is-active");
+    c.querySelector(".product-head").setAttribute("aria-expanded", "false");
+  });
+  productDetail.classList.remove("is-open");
+};
 
 cards.forEach((card) => {
   const head = card.querySelector(".product-head");
   head.addEventListener("click", () => {
-    const willOpen = !card.classList.contains("is-open");
-    cards.forEach((c) => {
-      c.classList.remove("is-open");
-      c.querySelector(".product-head").setAttribute("aria-expanded", "false");
-    });
-    if (willOpen) {
+    const wasOpen = card.classList.contains(desktopMq.matches ? "is-active" : "is-open");
+    closeProducts();
+    if (wasOpen) return;
+    head.setAttribute("aria-expanded", "true");
+    if (desktopMq.matches) {
+      card.classList.add("is-active");
+      productDetailInner.replaceChildren(
+        card.querySelector(".panel-body").cloneNode(true)
+      );
+      productDetail.classList.add("is-open");
+    } else {
       card.classList.add("is-open");
-      head.setAttribute("aria-expanded", "true");
-      // al expandirse la tarjeta cambia de fila en el grid: mantenerla a la vista
       requestAnimationFrame(() =>
         card.scrollIntoView({ behavior: "smooth", block: "nearest" })
       );
@@ -61,16 +78,20 @@ cards.forEach((card) => {
   });
 });
 
-/* ---- "Cotizar este producto": pre-selecciona en el formulario ---- */
+// al cruzar el breakpoint, resetear estados para no mezclar ambos modos
+desktopMq.addEventListener("change", closeProducts);
+
+/* ---- "Cotizar este producto": pre-selecciona en el formulario ----
+   Delegado en document porque los botones del panel compartido son clones. */
 const selectProducto = document.getElementById("fProducto");
 
-document.querySelectorAll(".btn-quote").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    selectProducto.value = btn.dataset.quote;
-    selectProducto.classList.remove("is-invalid");
-    document.getElementById("contacto").scrollIntoView({ behavior: "smooth" });
-    setTimeout(() => document.getElementById("fNombre").focus({ preventScroll: true }), 600);
-  });
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-quote");
+  if (!btn) return;
+  selectProducto.value = btn.dataset.quote;
+  selectProducto.classList.remove("is-invalid");
+  document.getElementById("contacto").scrollIntoView({ behavior: "smooth" });
+  setTimeout(() => document.getElementById("fNombre").focus({ preventScroll: true }), 600);
 });
 
 /* ---- Formulario → mensaje de WhatsApp ---- */

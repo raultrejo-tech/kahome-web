@@ -147,6 +147,7 @@ h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); max-width: 22ch; }
   transition: transform 0.25s ease;
 }
 .nav a:not(.nav-cta):hover::after { transform: scaleX(1); }
+.nav a.nav-cta { color: var(--paper); }
 
 .nav-toggle {
   display: none;
@@ -293,7 +294,9 @@ h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); max-width: 22ch; }
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
-.product-card.is-open { grid-column: 1 / -1; transform: none; box-shadow: var(--shadow); }
+.product-card.is-open { transform: none; box-shadow: var(--shadow); }
+/* tarjeta seleccionada en pantalla grande (el detalle se abre debajo del grid) */
+.product-card.is-active { border-color: var(--sand-dark); box-shadow: var(--shadow); transform: none; }
 
 .product-head {
   display: flex;
@@ -328,7 +331,8 @@ h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); max-width: 22ch; }
   transform: rotate(45deg);
   transition: transform 0.3s ease;
 }
-.product-card.is-open .product-chevron { transform: rotate(225deg); }
+.product-card.is-open .product-chevron,
+.product-card.is-active .product-chevron { transform: rotate(225deg); }
 
 .product-panel {
   display: grid;
@@ -359,14 +363,34 @@ h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); max-width: 22ch; }
 .sub-list li strong { font-weight: 500; }
 .sub-list li span { color: var(--ink-soft); font-size: 0.88rem; }
 
+.btn-quote { margin: 1rem 1.1rem 1.2rem; }
+
+/* ---- Panel de detalle compartido (pantalla grande) ---- */
+
+.product-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease, margin-top 0.35s ease;
+  margin-top: 0;
+}
+.product-detail.is-open { grid-template-rows: 1fr; margin-top: 1.2rem; }
+.product-detail-inner { overflow: hidden; }
+
+.product-detail .panel-body {
+  background: var(--paper);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+}
+.product-detail .sub-list { padding: 0; }
+.product-detail .btn-quote { margin: 1.1rem 0 0; }
+
 @media (min-width: 640px) {
-  .product-card.is-open .sub-list { grid-template-columns: repeat(2, 1fr); }
+  .product-detail .sub-list { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 960px) {
-  .product-card.is-open .sub-list { grid-template-columns: repeat(4, 1fr); }
+  .product-detail .sub-list { grid-template-columns: repeat(4, 1fr); }
 }
-
-.btn-quote { margin: 1rem 1.1rem 1.2rem; }
 
 /* ---------- Proceso ---------- */
 
