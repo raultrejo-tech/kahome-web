@@ -4,8 +4,7 @@
 
 /* ---- CONFIGURACIÓN — edita aquí los datos reales ---- */
 const CONFIG = {
-  // REEMPLAZAR: número de WhatsApp real con formato internacional (52 + 1 + 10 dígitos, sin espacios ni +)
-  whatsapp: "5219990000000",
+  whatsapp: "5219993929306",
   mensajeDefault: "¡Hola Kahome! 👋 Me gustaría recibir más información sobre sus productos.",
 };
 

@@ -14,7 +14,6 @@ npx serve .
 
 | Qué | Dónde |
 |---|---|
-| **Número de WhatsApp** | `script.js` → `CONFIG.whatsapp` (formato `521` + 10 dígitos, ej. `5219991234567`) |
 | **Dominio real** | Buscar y reemplazar `https://www.kahome.mx/` en `index.html` (canonical, OG, JSON-LD), `robots.txt` y `sitemap.xml` |
 | **Dirección y horario** | `index.html` → sección `#ubicacion` (comentario `REEMPLAZAR`) |
 | **Fotos reales** | Buscar los comentarios `<!-- REEMPLAZAR: ... -->` en `index.html` — hero, 6 productos y 3 proyectos usan placeholders SVG/CSS. Sustituir por `<img>` con `alt` descriptivo y `loading="lazy"` |
