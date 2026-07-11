@@ -90,7 +90,8 @@ document.addEventListener("click", (e) => {
   if (!btn) return;
   selectProducto.value = btn.dataset.quote;
   selectProducto.classList.remove("is-invalid");
-  document.getElementById("contacto").scrollIntoView({ behavior: "smooth" });
+  // directo al formulario (no al inicio de la sección) para que se vea el producto elegido
+  document.getElementById("contactForm").scrollIntoView({ behavior: "smooth", block: "start" });
   setTimeout(() => document.getElementById("fNombre").focus({ preventScroll: true }), 600);
 });
 
