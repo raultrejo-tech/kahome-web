@@ -494,6 +494,34 @@ h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); max-width: 22ch; }
 .testimonial p { margin-top: 0.6rem; font-size: 0.98rem; }
 .testimonial cite { display: block; margin-top: 0.8rem; font-style: normal; font-size: 0.88rem; color: var(--ink-soft); }
 
+/* Tarjetas de reseña estilo Google */
+.review-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.review-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--sand);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+.review-meta { display: grid; line-height: 1.35; }
+.review-meta cite {
+  margin-top: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.review-g { width: 20px; height: 20px; margin-left: auto; flex-shrink: 0; }
+.testimonial--google p { margin-top: 0.8rem; }
+
 .review-cta { margin-top: 2rem; text-align: center; color: var(--ink-soft); }
 .review-cta a { color: var(--sand-dark); font-weight: 500; }
 
@@ -573,6 +601,18 @@ h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); max-width: 22ch; }
 .location h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
 .location p { color: var(--ink-soft); font-size: 0.98rem; }
 .location .btn { margin-top: 1rem; }
+
+.location-note {
+  margin-top: 0.9rem;
+  padding: 0.7rem 0.95rem;
+  background: rgba(200, 169, 126, 0.16);
+  border-left: 3px solid var(--sand-dark);
+  border-radius: 0 10px 10px 0;
+  font-size: 0.92rem;
+}
+.location-note strong { color: var(--ink); font-weight: 500; }
+.location-note a,
+.location-note a strong { color: var(--sand-dark); font-weight: 500; }
 
 @media (min-width: 960px) {
   .location {

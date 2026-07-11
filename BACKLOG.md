@@ -6,11 +6,14 @@ Mejoras acordadas tras el análisis de competencia (2026-07-11). No implementar 
 
 - [ ] **Franja de cifras de confianza** bajo el hero (años en el mercado, proyectos instalados, marcas que se usan).
       ⏳ Raúl va a averiguar las cifras reales — no inventar números.
-- [ ] **Diferenciador clima de Yucatán**: reencuadrar el copy de cada producto por beneficio térmico/UV
+- [x] **Diferenciador clima de Yucatán**: reencuadrar el copy de cada producto por beneficio térmico/UV
       (blackout térmico, screen con protección UV, lambrín exterior resistente a sol/humedad, pasto que no se quema).
-      Aprobado como dirección de mensaje.
-- [ ] **Reseñas reales de Google con nombre** embebidas en la sección de casos de éxito (ya existe el link
-      de reseñas `g.page/r/CW_ckJtFS6PMEBM/review`; falta recopilar las reseñas para mostrarlas).
+      ✅ Aplicado 2026-07-11 en los 6 productos + subtítulo de la sección.
+- [ ] **Reseñas reales de Google con nombre** embebidas en la sección de casos de éxito.
+      🔶 Parcial 2026-07-11: tarjetas estilo Google (avatar, nombre, estrellas, logo G) ya implementadas;
+      la versión anterior quedó comentada en `index.html` para rollback. ⏳ Falta que Raúl pase el texto y
+      nombre de las reseñas reales (no se pudieron extraer automáticamente de Google Maps) — buscar los
+      marcadores `REEMPLAZAR` sobre `.testimonial-grid`.
 - [ ] **Fotos reales de instalaciones**: Raúl reemplazará los placeholders (comentarios `REEMPLAZAR` en
       `index.html`) y avisa cuando estén.
 
