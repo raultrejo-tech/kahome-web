@@ -251,6 +251,7 @@ h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); max-width: 22ch; }
 
 .hero-visual { max-width: 420px; margin-inline: auto; width: 100%; }
 .hero-svg { width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+.hero-img { width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow); object-fit: cover; display: block; }
 
 @media (min-width: 960px) {
   .hero { padding-top: calc(var(--header-h) + 4.5rem); padding-bottom: 5rem; }
