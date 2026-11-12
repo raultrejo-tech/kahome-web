@@ -147,6 +147,7 @@ h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); max-width: 22ch; }
   transition: transform 0.25s ease;
 }
 .nav a:not(.nav-cta):hover::after { transform: scaleX(1); }
+.nav a.is-current::after { transform: scaleX(1); }
 .nav a.nav-cta { color: var(--paper); }
 
 .nav-toggle {
@@ -190,6 +191,8 @@ h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); max-width: 22ch; }
   .nav.is-open { transform: translateX(0); }
   .nav a { padding: 0.9rem 0; font-size: 1.15rem; width: 100%; }
   .nav .nav-cta { margin-top: 1rem; text-align: center; }
+  .nav a.is-current { color: var(--sand-dark); }
+  .nav a.is-current::after { display: none; }
 
   .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }

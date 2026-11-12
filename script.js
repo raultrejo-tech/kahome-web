@@ -144,5 +144,36 @@ const observer = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
+/* ---- Menú: marca la sección que se está viendo ---- */
+const spyLinks = [...nav.querySelectorAll('a[href^="#"]:not(.nav-cta)')];
+const spyItems = spyLinks
+  .map((link) => ({ link, section: document.querySelector(link.getAttribute("href")) }))
+  .filter((item) => item.section);
+
+const markCurrent = () => {
+  const line = header.offsetHeight + window.innerHeight * 0.3;
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  let current = null;
+  spyItems.forEach((item) => {
+    if (item.section.getBoundingClientRect().top <= line) current = item;
+  });
+  if (atBottom && spyItems.length) current = spyItems[spyItems.length - 1];
+  spyItems.forEach(({ link }) => {
+    const on = current !== null && link === current.link;
+    link.classList.toggle("is-current", on);
+    if (on) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+};
+
+let spyTicking = false;
+window.addEventListener("scroll", () => {
+  if (spyTicking) return;
+  spyTicking = true;
+  requestAnimationFrame(() => { markCurrent(); spyTicking = false; });
+}, { passive: true });
+window.addEventListener("resize", markCurrent);
+markCurrent();
+
 /* ---- Año del footer ---- */
 document.getElementById("year").textContent = new Date().getFullYear();
