@@ -37,6 +37,7 @@
   {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
+    "@id": "https://www.kahome.mx/#negocio",
     "name": "Kahome Decoración",
     "alternateName": "KAHOME",
     "slogan": "Profesionales en decoración",
@@ -46,9 +47,16 @@
     "logo": "https://www.kahome.mx/assets/logo-kahome.png",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Calle 79 #315 x 40 y 42, Montes de Amé",
       "addressLocality": "Mérida",
       "addressRegion": "Yucatán",
+      "postalCode": "97115",
       "addressCountry": "MX"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 21.0288853,
+      "longitude": -89.6222446
     },
     "areaServed": [
       { "@type": "City", "name": "Mérida" },
@@ -60,7 +68,20 @@
     ],
     "hasMap": "https://maps.app.goo.gl/dJadkimDuMhJVmNC7",
     "telephone": "+52 999 392 9306",
-    "openingHours": "Mo-Fr 09:00-18:00",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "10:00",
+        "closes": "14:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "15:00",
+        "closes": "18:00"
+      }
+    ],
     "priceRange": "$$",
     "sameAs": [
       "https://www.facebook.com/KaHomeMX/",
@@ -75,6 +96,17 @@
       { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Madera y piedra tecnológica" } },
       { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Muebles de TV" } }
     ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Kahome Decoración",
+    "alternateName": ["KaHome", "KaHomeMX"],
+    "url": "https://www.kahome.mx/",
+    "inLanguage": "es-MX",
+    "publisher": { "@id": "https://www.kahome.mx/#negocio" }
   }
   </script>
 </head>
@@ -571,9 +603,8 @@
       <div class="location reveal" id="ubicacion">
         <div class="location-info">
           <h3>Visítanos en Mérida</h3>
-          <!-- REEMPLAZAR: dirección exacta y horario reales -->
-          <p>Mérida, Yucatán, México</p>
-          <p>Lunes a viernes · 9:00 a 18:00 h</p>
+          <p>Calle 79 #315 x 40 y 42, Montes de Amé, 97115 Mérida, Yucatán</p>
+          <p>Lunes a viernes · 10:00 a 14:00 y 15:00 a 18:00 h</p>
           <p class="location-note"><a href="#" data-wa-link><strong>Agenda tu cita por WhatsApp</strong></a> y te atendemos sin prisas, con asesoría dedicada.</p>
           <a href="https://maps.app.goo.gl/dJadkimDuMhJVmNC7" target="_blank" rel="noopener" class="btn btn-ghost">Cómo llegar</a>
         </div>
