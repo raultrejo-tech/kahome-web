@@ -47,6 +47,17 @@ const cards = document.querySelectorAll(".product-card");
 const productDetail = document.getElementById("productDetail");
 const productDetailInner = productDetail.querySelector(".product-detail-inner");
 const desktopMq = window.matchMedia("(min-width: 640px)");
+const wideMq = window.matchMedia("(min-width: 960px)");
+const productGrid = document.getElementById("productGrid");
+
+// coloca el panel justo debajo de la fila de la tarjeta elegida y apunta la pestaña hacia ella
+const placeDetail = (card) => {
+  const row = [...cards].filter((c) => c.offsetTop === card.offsetTop);
+  row[row.length - 1].after(productDetail);
+  const gridBox = productGrid.getBoundingClientRect();
+  const cardBox = card.getBoundingClientRect();
+  productDetail.style.setProperty("--notch-x", `${cardBox.left - gridBox.left + cardBox.width / 2}px`);
+};
 
 const closeProducts = () => {
   cards.forEach((c) => {
@@ -54,6 +65,7 @@ const closeProducts = () => {
     c.querySelector(".product-head").setAttribute("aria-expanded", "false");
   });
   productDetail.classList.remove("is-open");
+  if (productDetail.parentElement === productGrid) productGrid.after(productDetail); // regresa a su lugar original
 };
 
 cards.forEach((card) => {
@@ -68,7 +80,10 @@ cards.forEach((card) => {
       productDetailInner.replaceChildren(
         card.querySelector(".panel-body").cloneNode(true)
       );
-      productDetail.classList.add("is-open");
+      placeDetail(card);
+      requestAnimationFrame(() => productDetail.classList.add("is-open"));
+      // al terminar de abrir, si quedó cortado abajo, baja lo justo para verlo
+      setTimeout(() => productDetail.scrollIntoView({ behavior: "smooth", block: "nearest" }), 380);
     } else {
       card.classList.add("is-open");
       requestAnimationFrame(() =>
@@ -80,6 +95,7 @@ cards.forEach((card) => {
 
 // al cruzar el breakpoint, resetear estados para no mezclar ambos modos
 desktopMq.addEventListener("change", closeProducts);
+wideMq.addEventListener("change", closeProducts); // de 2 a 3 columnas cambian las filas
 
 /* ---- "Cotizar este producto": pre-marca el checkbox en el formulario ----
    Delegado en document porque los botones del panel compartido son clones. */
@@ -88,12 +104,78 @@ const productChecks = document.getElementById("productChecks");
 document.addEventListener("click", (e) => {
   const btn = e.target.closest(".btn-quote");
   if (!btn) return;
+  if (productModal.open) productModal.close();
   const check = productChecks.querySelector(`input[value="${btn.dataset.quote}"]`);
   if (check) check.checked = true;
   productChecks.classList.remove("is-invalid");
   // directo al formulario (no al inicio de la sección) para que se vea el producto elegido
   document.getElementById("contactForm").scrollIntoView({ behavior: "smooth", block: "start" });
   setTimeout(() => document.getElementById("fNombre").focus({ preventScroll: true }), 600);
+});
+
+/* ---- Ventana de detalle: clic en la foto de un producto ----
+   Muestra la foto grande con la descripción, las opciones y el botón de cotizar.
+   El clic en el resto de la tarjeta sigue abriendo las opciones como antes. */
+const productModal = document.createElement("dialog");
+productModal.className = "product-modal";
+productModal.setAttribute("aria-labelledby", "productModalTitle");
+productModal.innerHTML = `
+  <button type="button" class="product-modal-close" aria-label="Cerrar">&times;</button>
+  <div class="product-modal-media"></div>
+  <div class="product-modal-body">
+    <h3 id="productModalTitle"></h3>
+    <p class="product-modal-desc"></p>
+    <div class="product-modal-detail"></div>
+  </div>`;
+document.body.appendChild(productModal);
+
+const openProductModal = (card) => {
+  const img = card.querySelector(".product-visual img");
+  if (!img) return;
+  const big = img.cloneNode();
+  big.loading = "eager";
+  productModal.querySelector(".product-modal-media").replaceChildren(big);
+  productModal.querySelector("h3").textContent = card.querySelector(".product-title h3").textContent;
+  productModal.querySelector(".product-modal-desc").textContent = card.querySelector(".product-title p").textContent;
+  const detail = card.querySelector(".panel-body").cloneNode(true);
+  detail.querySelectorAll(".btn-photo").forEach((b) => b.remove());
+  productModal.querySelector(".product-modal-detail").replaceChildren(detail);
+  document.documentElement.classList.add("has-modal");
+  productModal.showModal();
+};
+
+productModal.addEventListener("close", () => document.documentElement.classList.remove("has-modal"));
+productModal.querySelector(".product-modal-close").addEventListener("click", () => productModal.close());
+// clic fuera de la ventana (en el fondo oscuro) la cierra
+productModal.addEventListener("click", (e) => {
+  if (e.target === productModal) productModal.close();
+});
+
+cards.forEach((card) => {
+  const img = card.querySelector(".product-visual img");
+  if (!img) return;
+  card.classList.add("has-photo");
+  img.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openProductModal(card);
+  });
+  // para teclado y lectores de pantalla: botón "Ver foto" dentro de las opciones
+  const photoBtn = document.createElement("button");
+  photoBtn.type = "button";
+  photoBtn.className = "btn btn-ghost btn-photo";
+  photoBtn.dataset.photo = card.dataset.product;
+  photoBtn.textContent = "Ver foto";
+  const quote = card.querySelector(".panel-body .btn-quote");
+  quote.before(photoBtn);
+});
+
+// delegado: los botones del panel compartido (pantalla grande) son clones
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-photo");
+  if (!btn) return;
+  const card = document.querySelector(`.product-card[data-product="${btn.dataset.photo}"]`);
+  if (card) openProductModal(card);
 });
 
 /* ---- Formulario → mensaje de WhatsApp ---- */
