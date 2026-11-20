@@ -204,6 +204,7 @@ form.addEventListener("submit", (e) => {
     "¿Me pueden dar más información y una cotización?",
   ].filter(Boolean);
 
+  document.dispatchEvent(new Event("kahome:whatsapp-form"));
   window.open(waUrl(lineas.join("\n")), "_blank", "noopener");
 });
 
