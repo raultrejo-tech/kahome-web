@@ -311,3 +311,40 @@
   .product-detail-close, .compare-table tbody tr, .compare-table tbody th, .compare-table tbody th::before, .compare-table td { transition: none; }
   .product-detail-close:hover { transform: none; }
 }
+
+/* ---------- Reseñas: invitación visible a dejar una reseña en Google ---------- */
+
+.review-band {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 1.2rem;
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.3rem 1.4rem;
+  box-shadow: var(--shadow);
+}
+.review-band-g { width: 40px; height: 40px; }
+.review-band-title { font-size: 1.12rem; font-weight: 500; color: var(--ink); }
+.review-band-text p:not(.review-band-title) { color: var(--ink-soft); font-size: 0.95rem; margin-top: 0.15rem; }
+.review-band-actions {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.2rem;
+}
+.review-band-star { color: #f4b400; margin-right: 0.15rem; }
+.review-band-all { color: var(--sand-dark); font-weight: 500; font-size: 0.95rem; }
+@media (min-width: 760px) {
+  .review-band { grid-template-columns: auto 1fr auto; padding: 1.4rem 1.8rem; }
+  .review-band-actions { grid-column: auto; justify-content: flex-end; }
+}
+@media (hover: hover) {
+  .review-band .btn-primary:hover .review-band-star { display: inline-block; transform: rotate(-12deg) scale(1.15); }
+}
+.review-band-star { display: inline-block; transition: transform 0.25s ease; }
+@media (prefers-reduced-motion: reduce) { .review-band-star { transition: none; } }
+
+.footer-links { flex-wrap: wrap; justify-content: center; }
+.footer-links a.footer-review { color: var(--sand); font-weight: 500; }
+.footer-links a.footer-review:hover { color: var(--cream); }
