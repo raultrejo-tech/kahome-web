@@ -5,15 +5,18 @@
 /* ---- CONFIGURACIÓN — edita aquí los datos reales ---- */
 const CONFIG = {
   whatsapp: "5219993929306",
-  mensajeDefault: "¡Hola Kahome! 👋 Me gustaría recibir más información sobre sus productos.",
+  mensajeDefault: "¡Hola Kahome! Me gustaría recibir más información sobre sus productos.",
 };
 
 const waUrl = (texto) =>
   `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`;
 
 /* ---- Links directos a WhatsApp (botón flotante, canal de contacto) ---- */
+// en el navegador de Facebook/Instagram se abre en la misma pestaña (ver abrirWhatsApp)
+const enAppDeMeta = /FBAN|FBAV|FB_IAB|Instagram/i.test(navigator.userAgent);
 document.querySelectorAll("[data-wa-link]").forEach((el) => {
   el.href = waUrl(CONFIG.mensajeDefault);
+  if (enAppDeMeta) return;
   el.target = "_blank";
   el.rel = "noopener";
 });
@@ -77,9 +80,19 @@ cards.forEach((card) => {
     head.setAttribute("aria-expanded", "true");
     if (desktopMq.matches) {
       card.classList.add("is-active");
-      productDetailInner.replaceChildren(
-        card.querySelector(".panel-body").cloneNode(true)
-      );
+      const body = card.querySelector(".panel-body").cloneNode(true);
+      // botón para cerrar el panel; regresa el foco a la tarjeta que lo abrió
+      const closeBtn = document.createElement("button");
+      closeBtn.type = "button";
+      closeBtn.className = "product-detail-close";
+      closeBtn.setAttribute("aria-label", `Cerrar opciones de ${card.dataset.product}`);
+      closeBtn.innerHTML = "&times;";
+      closeBtn.addEventListener("click", () => {
+        closeProducts();
+        head.focus({ preventScroll: true });
+      });
+      body.prepend(closeBtn);
+      productDetailInner.replaceChildren(body);
       placeDetail(card);
       requestAnimationFrame(() => productDetail.classList.add("is-open"));
       // al terminar de abrir, si quedó cortado abajo, baja lo justo para verlo
@@ -94,6 +107,15 @@ cards.forEach((card) => {
 });
 
 // al cruzar el breakpoint, resetear estados para no mezclar ambos modos
+// Esc también cierra el panel (si no hay una ventana de foto abierta)
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape" || !productDetail.classList.contains("is-open")) return;
+  if (document.querySelector("dialog[open]")) return;
+  const active = document.querySelector(".product-card.is-active .product-head");
+  closeProducts();
+  active?.focus({ preventScroll: true });
+});
+
 desktopMq.addEventListener("change", closeProducts);
 wideMq.addEventListener("change", closeProducts); // de 2 a 3 columnas cambian las filas
 
@@ -105,7 +127,7 @@ const PROBLEMAS = {
   privacidad: { nombre: "Privacidad sin perder luz", medida: "ventanas" },
   piso: { nombre: "Piso nuevo o con humedad", medida: "piso" },
   muro: { nombre: "Renovar un muro", medida: "muro" },
-  otro: { nombre: "Otro proyecto", medida: "otro" },
+  otro: { nombre: "Otro acabado", medida: "otro" },
 };
 // cortinas y persianas pueden resolver varios problemas: ahí el cliente elige en el paso 1
 const PRODUCTO_A_PROBLEMA = {
@@ -122,6 +144,9 @@ document.addEventListener("click", (e) => {
   const problema = sol ? sol.dataset.problem : PRODUCTO_A_PROBLEMA[productoInteres];
   const check = problema && form.querySelector(`input[name="problema"][value="${problema}"]`);
   if (check) check.checked = true;
+  // desde «Cotizar cortinas/persianas» ya sabemos qué prefiere para sus ventanas
+  const prefiere = { "Cortinas tradicionales": "Cortina", "Persianas enrollables": "Persiana" }[productoInteres];
+  if (prefiere) form.querySelector(`input[name="prefiere"][value="${prefiere}"]`).checked = true;
   // con el problema ya elegido se salta al paso 2; el cliente puede regresar
   showStep(check ? 1 : 0, false);
   form.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -211,6 +236,16 @@ const problemasElegidos = () =>
   [...form.querySelectorAll('input[name="problema"]:checked')].map((i) => i.value);
 const tiposMedida = () => [...new Set(problemasElegidos().map((p) => PROBLEMAS[p].medida))];
 const valorRadio = (name) => form.querySelector(`input[name="${name}"]:checked`)?.value || "";
+const valores = (name) => [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((i) => i.value);
+
+// «180» se entiende como centímetros y «1.80» como metros; si ya escribió la unidad, se respeta
+const conUnidad = (v) => {
+  if (!v) return "?";
+  if (/[a-z]/i.test(v)) return v;
+  const n = parseFloat(v.replace(",", "."));
+  if (Number.isNaN(n)) return v;
+  return `${v} ${n > 10 ? "cm" : "m"}`;
+};
 
 function updateMedidas() {
   const sin = qSinMedidas.checked;
@@ -219,6 +254,8 @@ function updateMedidas() {
     b.hidden = sin || !tipos.includes(b.dataset.medida);
   });
   document.getElementById("qMedidasVacio").hidden = sin || tipos.length > 0;
+  // la pregunta cortina/persiana solo aplica si eligió algo de ventanas
+  document.getElementById("qPrefiereWrap").hidden = !tipos.includes("ventanas");
 }
 
 function renumerarVentanas() {
@@ -253,8 +290,10 @@ function buildMessage() {
   const L = ["¡Hola Kahome! Quiero una cotización:", ""];
   if (productoInteres) L.push(`• Me interesa: ${productoInteres}`);
   L.push(`• Quiero resolver: ${problemasElegidos().map((p) => PROBLEMAS[p].nombre).join(", ") || "—"}`);
-  const espacio = valorRadio("espacio");
-  if (espacio) L.push(`• Espacio: ${espacio}`);
+  const espacios = valores("espacio");
+  if (espacios.length) L.push(`• Espacio: ${espacios.join(", ")}`);
+  const prefiere = valorRadio("prefiere");
+  if (prefiere && tiposMedida().includes("ventanas")) L.push(`• Prefiere: ${prefiere.toLowerCase()}`);
 
   if (qSinMedidas.checked) {
     L.push("• Medidas: no las tengo, quiero visita para medir");
@@ -266,7 +305,7 @@ function buildMessage() {
         .filter(([a, h]) => a || h);
       if (ventanas.length) {
         L.push(`• Ventanas (${ventanas.length}):`);
-        ventanas.forEach(([a, h], i) => L.push(`   ${i + 1}) ${a || "?"} × ${h || "?"} m`));
+        ventanas.forEach(([a, h], i) => L.push(`   ${i + 1}) ${conUnidad(a)} × ${conUnidad(h)}`));
       }
     }
     const piso = document.getElementById("qPiso").value.trim();
@@ -281,6 +320,7 @@ function buildMessage() {
   const visita = valorRadio("visita");
   if (colonia) L.push(`• Colonia: ${colonia}`);
   if (visita) L.push(`• Visita: ${visita.toLowerCase()}`);
+  if (document.getElementById("qFotos").checked) L.push("• Fotos: se las mando en este chat");
   L.push("", `Soy ${form.nombre.value.trim() || "…"}.`);
   return L.join("\n");
 }
@@ -350,8 +390,20 @@ form.addEventListener("submit", (e) => {
   if (!validar(0)) { showStep(0); return; }
   if (!validar(step)) return;
   document.dispatchEvent(new Event("kahome:whatsapp-form"));
-  window.open(waUrl(buildMessage()), "_blank", "noopener");
+  abrirWhatsApp(waUrl(buildMessage()));
 });
+
+// En el navegador interno de Facebook e Instagram (de ahí llega el tráfico de los anuncios)
+// las ventanas nuevas pueden no abrir: ahí se navega en la misma pestaña.
+function abrirWhatsApp(url) {
+  if (enAppDeMeta) {
+    location.href = url;
+    return;
+  }
+  const w = window.open(url, "_blank");
+  if (w) w.opener = null;
+  else location.href = url;
+}
 
 showStep(0, false);
 
