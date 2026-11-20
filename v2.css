@@ -1,0 +1,266 @@
+/* ============================================================
+   KAHOME — versión 2 (propuesta): estilos que se suman a styles.css
+   Soluciones con foto, franja de otros productos, obras reales,
+   menú en tablet y cotizador por pasos
+   ============================================================ */
+
+.solutions [hidden],
+.quote-form [hidden] { display: none !important; }
+
+/* ---------- Soluciones: 4 tarjetas con foto; toda la tarjeta es clicable ---------- */
+
+.solutions { background: var(--white); }
+.sol-grid {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+/* celular: carrusel horizontal (se ve que hay más tarjetas a la derecha) */
+@media (max-width: 639.98px) {
+  .sol-grid {
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+    scroll-padding-inline: 1.25rem;
+    padding-bottom: 0.4rem;
+  }
+  .sol-grid::-webkit-scrollbar { display: none; }
+  .sol-card { scroll-snap-align: start; }
+}
+@media (min-width: 640px) { .sol-grid { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; } }
+@media (min-width: 1100px) { .sol-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.sol-card {
+  position: relative;
+  background: var(--paper);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  transition: opacity 0.6s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sol-photo { aspect-ratio: 4 / 3; overflow: hidden; background: var(--cream); }
+.sol-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.sol-body { padding: 1.1rem 1.2rem 1.25rem; display: grid; grid-template-rows: auto 1fr auto auto; gap: 0.5rem; }
+.sol-card h3 { font-size: 1.15rem; }
+.sol-pain { color: var(--ink-soft); font-size: 0.93rem; }
+.sol-fix { font-size: 0.85rem; color: var(--sand-dark); font-weight: 500; }
+.sol-quote {
+  justify-self: start;
+  background: none; border: 0; padding: 0 0 2px;
+  font: inherit; font-weight: 600; color: var(--ink);
+  border-bottom: 1.5px solid var(--sand);
+  cursor: pointer;
+}
+.sol-quote span { display: inline-block; transition: transform 0.25s ease; }
+/* el botón cubre toda la tarjeta: se puede tocar en cualquier parte */
+.sol-card .sol-quote::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.sol-card .sol-quote:focus-visible { outline: none; }
+.sol-card:has(.sol-quote:focus-visible) { box-shadow: 0 0 0 3px var(--sand); }
+
+@media (hover: hover) {
+  .sol-card.is-visible:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+  .sol-card:hover .sol-photo img { transform: scale(1.05); }
+  .sol-card:hover .sol-quote,
+  .sol-quote:hover { color: var(--sand-dark); }
+  .sol-card:hover .sol-quote span,
+  .sol-quote:hover span { transform: translateX(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sol-card, .sol-photo img, .sol-quote span { transition: none; }
+  .sol-card.is-visible:hover { transform: none; }
+  .sol-card:hover .sol-photo img { transform: none; }
+}
+.segments-proof a { color: var(--sand-dark); font-weight: 500; }
+
+/* ---------- Productos: franja «También instalamos» ---------- */
+
+.also-strip {
+  margin-top: 1.4rem;
+  padding: 1rem 1.2rem;
+  border: 1px dashed var(--cream-dark);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.also-strip strong { color: var(--ink); font-weight: 500; }
+.also-strip .sol-quote { margin-left: 0.3rem; }
+
+/* ---------- Obras: fotos reales en lugar de placeholders ---------- */
+
+@media (min-width: 640px) { .project-grid--two { grid-template-columns: repeat(2, 1fr); } }
+.project-card--photo { overflow: hidden; }
+.project-card--photo img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.5s ease; }
+@media (min-width: 960px) { .project-card--photo img { aspect-ratio: 16 / 11; } }
+@media (hover: hover) { .project-card--photo:hover img { transform: scale(1.04); } }
+@media (prefers-reduced-motion: reduce) { .project-card--photo img { transition: none; } }
+
+/* reseñas en celular: carrusel horizontal en lugar de 3 tarjetas apiladas */
+@media (max-width: 639.98px) {
+  .testimonial-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 85%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+    scroll-padding-inline: 1.25rem;
+  }
+  .testimonial-grid::-webkit-scrollbar { display: none; }
+  .testimonial-grid > * { scroll-snap-align: start; }
+}
+
+/* ---------- Menú en tablet: que no se encime con el logo ---------- */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .header-logo img { width: 128px; }
+  .nav { gap: 1rem; }
+  .nav a { font-size: 0.92rem; }
+  .nav a[href="#faq"] { display: none; }
+  .nav .nav-cta { white-space: nowrap; padding: 0.55rem 1.1rem; }
+}
+
+/* ---------- Contacto: columna izquierda ---------- */
+
+.contact-promise {
+  display: flex; align-items: center; gap: 0.8rem;
+  margin-top: 1.6rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+}
+.contact-promise small { display: block; color: var(--ink-soft); font-size: 0.88rem; }
+.contact-promise strong { font-weight: 500; }
+.promise-dot {
+  flex: none;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--wa);
+  box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.2);
+}
+
+.contact-next { list-style: none; display: grid; gap: 0.9rem; margin-top: 1.6rem; }
+.contact-next li { display: grid; grid-template-columns: 28px 1fr; gap: 0.8rem; color: var(--ink-soft); font-size: 0.93rem; }
+.contact-next li > span {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid var(--ink); color: var(--ink);
+  display: grid; place-items: center;
+  font-size: 0.85rem; font-weight: 500;
+}
+.contact-next strong { display: block; color: var(--ink); font-weight: 500; font-size: 1rem; }
+
+
+/* ---------- Cotizador por pasos ---------- */
+
+.q-progress { display: grid; gap: 0.5rem; }
+.q-progress-top { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--ink-soft); }
+.q-bar { height: 4px; border-radius: 4px; background: var(--cream); overflow: hidden; }
+.q-bar i { display: block; height: 100%; width: 25%; background: var(--ink); transition: width 0.3s ease; }
+/* sin JS no hay pasos: la barra no aplica */
+.quote-form:not(.is-stepped) .q-progress { display: none; }
+
+.q-step { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 0.9rem; }
+.q-title { font-size: 1.3rem; font-weight: 500; padding: 0; margin-bottom: 0.9rem; outline: none; }
+.q-hint { color: var(--ink-soft); font-size: 0.92rem; margin-top: -0.6rem; }
+.q-label { font-weight: 500; font-size: 0.95rem; }
+.q-error { color: #b0473d; font-size: 0.88rem; }
+.q-note {
+  font-size: 0.9rem;
+  background: rgba(200, 169, 126, 0.16);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+}
+
+.q-tiles { display: grid; gap: 0.6rem; }
+@media (min-width: 520px) { .q-tiles { grid-template-columns: repeat(2, 1fr); } }
+.q-tile { position: relative; cursor: pointer; }
+.q-tile input { position: absolute; opacity: 0; pointer-events: none; }
+.q-tile span {
+  display: grid; gap: 0.1rem; height: 100%;
+  border: 1.5px solid rgba(28, 26, 23, 0.15);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.q-tile b { font-weight: 500; }
+.q-tile small { color: var(--ink-soft); font-size: 0.82rem; line-height: 1.35; }
+.q-tile:hover span { border-color: var(--sand-dark); }
+.q-tile input:checked + span { border-color: var(--ink); background: var(--white); box-shadow: inset 0 0 0 1px var(--ink); }
+.q-tile input:focus-visible + span { box-shadow: 0 0 0 3px rgba(200, 169, 126, 0.35); }
+
+.q-block {
+  border: 1px solid rgba(28, 26, 23, 0.12);
+  border-radius: 12px;
+  padding: 0.9rem;
+  display: grid; gap: 0.7rem;
+}
+.q-block-title { font-weight: 500; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; }
+.q-block-title small { color: var(--ink-soft); font-weight: 400; font-size: 0.85rem; }
+
+.q-howto {
+  display: grid; grid-template-columns: 84px 1fr; gap: 0.8rem; align-items: center;
+  background: rgba(200, 169, 126, 0.14);
+  border-radius: 10px; padding: 0.6rem 0.75rem;
+}
+.q-howto svg { width: 84px; height: auto; }
+.q-howto svg rect, .q-howto svg path { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+.q-howto svg text { fill: var(--ink-soft); font: 11px var(--font); }
+.q-howto p { font-size: 0.85rem; color: var(--ink-soft); }
+
+#qVentanas { display: grid; gap: 0.5rem; }
+.q-win { display: grid; grid-template-columns: 20px 1fr auto 1fr 28px; gap: 0.5rem; align-items: center; }
+.q-win-n { font-size: 0.85rem; color: var(--ink-soft); }
+.q-x { color: var(--ink-soft); }
+.q-win input {
+  min-width: 0; width: 100%;
+  font: inherit; color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid rgba(28, 26, 23, 0.15);
+  border-radius: 10px;
+  padding: 0.6rem 0.7rem;
+  font-variant-numeric: tabular-nums;
+}
+.q-win input:focus { outline: none; border-color: var(--sand-dark); box-shadow: 0 0 0 3px rgba(200, 169, 126, 0.25); }
+.q-del { border: 0; background: none; color: var(--ink-soft); font-size: 1.2rem; cursor: pointer; }
+.q-link {
+  justify-self: start;
+  background: none; border: 0; padding: 0 0 2px;
+  font: inherit; font-weight: 500; color: var(--ink);
+  border-bottom: 1.5px solid var(--sand);
+  cursor: pointer;
+}
+
+.q-nomeasure { display: flex; gap: 0.6rem; align-items: flex-start; cursor: pointer; font-size: 0.95rem; }
+.q-nomeasure input { margin-top: 0.35rem; accent-color: var(--ink); }
+.q-nomeasure b { font-weight: 500; }
+
+.q-preview { font-size: 0.9rem; }
+.q-preview summary { cursor: pointer; color: var(--ink-soft); }
+.q-preview pre {
+  margin-top: 0.6rem;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+  font: 0.88rem/1.5 var(--font);
+  background: #e7f6dc; color: #1c2a17;
+  border-radius: 12px 12px 4px 12px;
+  padding: 0.8rem 0.95rem;
+}
+
+.q-nav { display: flex; justify-content: space-between; gap: 0.6rem; flex-wrap: wrap; }
+.q-nav .btn:only-child,
+.q-nav #qNext, .q-nav #qSend { margin-left: auto; }
+.btn-wa { background: var(--wa); color: #fff; border: 0; }
+.btn-wa:hover { background: #1ebe5b; box-shadow: var(--shadow); transform: translateY(-2px); }
+/* sin JS solo existe el botón de enviar */
+.quote-form:not(.is-stepped) #qBack,
+.quote-form:not(.is-stepped) #qNext { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .q-bar i, .q-tile span { transition: none; }
+}

@@ -31,6 +31,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tracking.css">
+  <link rel="stylesheet" href="v2.css">
 
   <!-- Datos estructurados para Google (rich results) -->
   <script type="application/ld+json">
@@ -118,12 +120,11 @@
       <img src="assets/logo-kahome.png" alt="Kahome Decoración — Profesionales en decoración" width="150" height="45">
     </a>
     <nav class="nav" id="nav" aria-label="Navegación principal">
-      <a href="#clientes">Espacios</a>
+      <a href="#soluciones">Soluciones</a>
       <a href="#productos">Productos</a>
-      <a href="#proceso">Proceso</a>
       <a href="#proyectos">Proyectos</a>
-      <a href="#faq">FAQ</a>
       <a href="#contacto">Contacto</a>
+      <a href="#faq">Preguntas</a>
       <a href="#contacto" class="btn btn-primary nav-cta">Cotiza gratis</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
@@ -142,12 +143,12 @@
         <h1 class="reveal">Cortinas, persianas y papel tapiz <em>a la medida</em> en Mérida</h1>
         <p class="hero-sub reveal">Transformamos tus espacios en lugares espectaculares. Cuéntanos tu proyecto y te acompañamos de la idea a la instalación.</p>
         <div class="hero-actions reveal">
-          <a href="#contacto" class="btn btn-primary btn-lg" data-wa-cta>Cotización gratis por WhatsApp</a>
-          <a href="#productos" class="btn btn-ghost btn-lg">Ver productos</a>
+          <a href="#contacto" class="btn btn-primary btn-lg" data-wa-cta>Pide tu cotización gratis</a>
+          <a href="#soluciones" class="btn btn-ghost btn-lg">¿Qué quieres resolver?</a>
         </div>
         <ul class="hero-badges reveal" aria-label="Ventajas">
-          <li>Cotización inicial gratis</li>
-          <li>Fabricación a la medida</li>
+          <li>Visita y medición sin costo</li>
+          <li>Hecho a la medida</li>
           <li>Instalación profesional</li>
         </ul>
       </div>
@@ -160,38 +161,58 @@
   <!-- Resumen indexable para buscadores -->
   <section class="intro" aria-label="Acerca de Kahome">
     <div class="container">
-      <p class="intro-text reveal"><strong>Kahome Decoración</strong> es una empresa de Mérida, Yucatán, especializada en <strong>cortinas tradicionales, persianas enrollables y papel tapiz a la medida</strong>. Te asesoramos, medimos e instalamos con acabados profesionales para hogares y negocios en Mérida y sus alrededores. También instalamos pisos SPC, madera y piedra tecnológica y muebles de TV. Pide tu cotización inicial gratis y déjanos guiarte en tu próximo proyecto de decoración.</p>
+      <p class="intro-text reveal"><strong>Kahome Decoración</strong> es una empresa de Mérida, Yucatán, especializada en <strong>cortinas tradicionales, persianas enrollables y papel tapiz a la medida</strong>. Te asesoramos, medimos e instalamos en casas y negocios del norte de Mérida, Temozón, Cholul, Conkal, Progreso y Chicxulub. También instalamos pisos SPC y otros acabados a la medida.</p>
     </div>
   </section>
 
-  <!-- ============ ESPACIOS EN LOS QUE TRABAJAMOS ============ -->
-  <section class="section segments" id="clientes" aria-labelledby="segmentsTitle">
+  <!-- ============ SOLUCIONES (v2): reemplaza «Espacios en los que trabajamos» ============ -->
+  <section class="section solutions" id="soluciones" aria-labelledby="solTitle">
     <div class="container">
-      <p class="eyebrow reveal">Espacios en los que trabajamos</p>
-      <h2 class="reveal" id="segmentsTitle">De tu casa a un edificio completo</h2>
-      <p class="section-sub reveal">Cada espacio pide algo distinto. Te asesoramos según cómo se va a usar.</p>
+      <p class="eyebrow reveal">Soluciones para el clima de Mérida</p>
+      <h2 class="reveal" id="solTitle">¿Qué quieres resolver en tu espacio?</h2>
+      <p class="section-sub reveal">Elige tu caso y te decimos qué funciona. Atendemos casas, Airbnb, oficinas y edificios completos.</p>
 
-      <!-- REEMPLAZAR: cuando haya fotos reales de cada tipo de obra, agregar una imagen arriba de cada tarjeta -->
-      <ul class="segment-grid">
-        <li class="segment-card reveal">
-          <h3>Casas</h3>
-          <p>Recámaras oscuras y frescas, salas con luz sin calor y muros que cambian el ambiente.</p>
+      <ul class="sol-grid">
+        <li class="sol-card reveal">
+          <div class="sol-photo"><img src="assets/obra-ventanal-jardin-persiana.jpg" alt="Persiana enrollable en un ventanal con sol" width="900" height="1125" loading="lazy" decoding="async"></div>
+          <div class="sol-body">
+            <h3>Sol y calor de la tarde</h3>
+            <p class="sol-pain">La sala se calienta, el sol deslava los muebles y no se ve la pantalla.</p>
+            <p class="sol-fix">Persiana screen UV · blackout térmico</p>
+            <button type="button" class="sol-quote" data-problem="sol">Cotizar esto <span aria-hidden="true">→</span></button>
+          </div>
         </li>
-        <li class="segment-card reveal">
-          <h3>Departamentos y Airbnb</h3>
-          <p>Blackout que tus huéspedes notan en las reseñas, con la instalación coordinada con tus reservas.</p>
+        <li class="sol-card reveal">
+          <div class="sol-photo"><img src="assets/cortinas-blackout-sheer-recamara.jpeg" alt="Recámara con cortina blackout y sheer" width="1200" height="1600" loading="lazy" decoding="async"></div>
+          <div class="sol-body">
+            <h3>Dormir en oscuridad total</h3>
+            <p class="sol-pain">Luz desde las 6 de la mañana o huéspedes que se quejan en las reseñas.</p>
+            <p class="sol-fix">Persiana o cortina blackout</p>
+            <button type="button" class="sol-quote" data-problem="oscuro">Cotizar esto <span aria-hidden="true">→</span></button>
+          </div>
         </li>
-        <li class="segment-card reveal">
-          <h3>Oficinas y gobierno</h3>
-          <p>Persianas screen que quitan el reflejo de las pantallas sin perder la luz natural.</p>
+        <li class="sol-card reveal">
+          <div class="sol-photo"><img src="assets/cortinas-sheer-visillo-sala.jpeg" alt="Sala con cortinas sheer que filtran la luz" width="1201" height="1309" loading="lazy" decoding="async"></div>
+          <div class="sol-body">
+            <h3>Privacidad sin perder luz</h3>
+            <p class="sol-pain">Ventanales a la calle o al vecino, sin vivir con la cortina cerrada.</p>
+            <p class="sol-fix">Sheer elegance · screen · visillo</p>
+            <button type="button" class="sol-quote" data-problem="privacidad">Cotizar esto <span aria-hidden="true">→</span></button>
+          </div>
         </li>
-        <li class="segment-card reveal">
-          <h3>Edificios y desarrollos</h3>
-          <p>Muchas ventanas, un solo acabado: medimos, cotizamos el proyecto completo y coordinamos con tu obra.</p>
+        <li class="sol-card reveal">
+          <!-- CONFIRMAR con Karla: que la foto del papel tapiz en espiga sea obra de Kahome -->
+          <div class="sol-photo"><img src="assets/papel-tapiz-espiga-sala.jpg" alt="Muro de sala con papel tapiz en espiga" width="900" height="1125" loading="lazy" decoding="async"></div>
+          <div class="sol-body">
+            <h3>Renovar un muro</h3>
+            <p class="sol-pain">Un muro sin chiste en la sala, la recámara o la recepción, sin obra ni polvo.</p>
+            <p class="sol-fix">Papel tapiz texturizado o liso</p>
+            <button type="button" class="sol-quote" data-problem="muro">Cotizar esto <span aria-hidden="true">→</span></button>
+          </div>
         </li>
       </ul>
 
-      <p class="segments-proof reveal">Hemos instalado en casas, departamentos de renta vacacional, oficinas, edificios de departamentos y dependencias de gobierno en Mérida.</p>
+      <p class="segments-proof reveal">Hemos instalado en casas, departamentos de renta vacacional, oficinas, edificios y dependencias de gobierno. ¿Eres arquitecto, interiorista o constructor? <a href="#" data-wa-link>Cotizamos tu proyecto completo</a>.</p>
     </div>
   </section>
 
@@ -200,7 +221,7 @@
     <div class="container">
       <p class="eyebrow reveal">Nuestros productos</p>
       <h2 class="reveal">Cortinas, persianas y papel tapiz a la medida en Mérida</h2>
-      <p class="section-sub reveal">Diseñados para el clima de Yucatán: menos calor, protección UV y materiales que aguantan la humedad. Toca una categoría para ver sus opciones y pide cotización.</p>
+      <p class="section-sub reveal">Diseñados para el clima de Yucatán: menos calor, protección UV y materiales que aguantan la humedad. Toca un producto para ver sus opciones.</p>
 
       <div class="product-grid" id="productGrid">
 
@@ -253,9 +274,9 @@
 
         <article class="product-card reveal" data-product="Papel tapiz">
           <button class="product-head" aria-expanded="false">
-            <div class="product-visual" aria-hidden="true">
-              <!-- REEMPLAZAR: foto real de papel tapiz instalado por Kahome -->
-              <svg viewBox="0 0 120 90"><rect width="120" height="90" fill="#EDE8DC"/><rect x="14" y="10" width="92" height="72" rx="3" fill="#FAF8F3" stroke="#1c1a17" stroke-width="2"/><path d="M22 20 q8 12 0 24 q-8 12 0 24" stroke="#1c1a17" stroke-width="1.5" fill="none" opacity="0.6"/><path d="M42 20 q8 12 0 24 q-8 12 0 24" stroke="#C8A97E" stroke-width="2" fill="none"/><path d="M62 20 q8 12 0 24 q-8 12 0 24" stroke="#1c1a17" stroke-width="1.5" fill="none" opacity="0.6"/><path d="M82 20 q8 12 0 24 q-8 12 0 24" stroke="#C8A97E" stroke-width="2" fill="none"/><path d="M98 20 q8 12 0 24 q-8 12 0 24" stroke="#1c1a17" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+            <div class="product-visual">
+              <!-- CONFIRMAR con Karla: que la foto del papel tapiz en espiga sea obra de Kahome -->
+              <img src="assets/papel-tapiz-espiga-sala.jpg" alt="Papel tapiz con diseño de espiga en el muro de una sala" width="900" height="1125" loading="lazy" decoding="async">
             </div>
             <div class="product-title">
               <h3>Papel tapiz</h3>
@@ -274,74 +295,9 @@
           </div>
         </article>
 
-        <article class="product-card reveal" data-product="Pisos SPC">
-          <button class="product-head" aria-expanded="false">
-            <div class="product-visual" aria-hidden="true">
-              <!-- REEMPLAZAR: foto real de piso SPC instalado -->
-              <svg viewBox="0 0 120 90"><rect width="120" height="90" fill="#EDE8DC"/><g stroke="#1c1a17" stroke-width="2"><rect x="10" y="14" width="48" height="18" fill="#FAF8F3"/><rect x="62" y="14" width="48" height="18" fill="#D9CFBB"/><rect x="10" y="36" width="24" height="18" fill="#D9CFBB"/><rect x="38" y="36" width="48" height="18" fill="#FAF8F3"/><rect x="90" y="36" width="20" height="18" fill="#C8A97E"/><rect x="10" y="58" width="48" height="18" fill="#FAF8F3"/><rect x="62" y="58" width="48" height="18" fill="#D9CFBB"/></g></svg>
-            </div>
-            <div class="product-title">
-              <h3>Pisos SPC</h3>
-              <p>Piso rígido 100% impermeable, resistente a la humedad y a los golpes del día a día.</p>
-            </div>
-            <span class="product-chevron" aria-hidden="true"></span>
-          </button>
-          <div class="product-panel">
-            <div class="panel-body">
-            <ul class="sub-list">
-              <li><strong>Efecto madera</strong><span>La calidez visual de la madera, sin que la humedad la deforme.</span></li>
-              <li><strong>Click system</strong><span>Instalación rápida y limpia, sin necesidad de pegamento.</span></li>
-            </ul>
-            <button class="btn btn-primary btn-quote" data-quote="Pisos SPC">Cotizar piso SPC</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="product-card reveal" data-product="Madera y piedra tecnológica">
-          <button class="product-head" aria-expanded="false">
-            <div class="product-visual">
-              <img src="assets/piedra-tecnologica-madera-recepcion.jpeg" alt="Muro de madera y piedra tecnológica instalado por Kahome Decoración en una recepción de Mérida" width="1280" height="960" loading="lazy" decoding="async">
-            </div>
-            <div class="product-title">
-              <h3>Madera y piedra tecnológica</h3>
-              <p>El aspecto natural de la madera y la piedra, hechos para resistir el trópico sin mantenimiento.</p>
-            </div>
-            <span class="product-chevron" aria-hidden="true"></span>
-          </button>
-          <div class="product-panel">
-            <div class="panel-body">
-            <ul class="sub-list">
-              <li><strong>Madera tecnológica</strong><span>Fachadas, pérgolas y muros con calidez de madera sin pudrirse ni decolorarse.</span></li>
-              <li><strong>Piedra tecnológica</strong><span>Acabado ultraligero, fácil de instalar y sin obra.</span></li>
-            </ul>
-            <button class="btn btn-primary btn-quote" data-quote="Madera y piedra tecnológica">Cotizar madera y piedra</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="product-card reveal" data-product="Muebles de TV">
-          <button class="product-head" aria-expanded="false">
-            <div class="product-visual">
-              <img src="assets/mueble-tv-madera-piedra.jpeg" alt="Mueble de TV a la medida con panel de madera y piedra tecnológica fabricado por Kahome Decoración" width="1200" height="1334" loading="lazy" decoding="async">
-            </div>
-            <div class="product-title">
-              <h3>Muebles de TV</h3>
-              <p>Muebles a la medida que integran tu pantalla y dan orden a la sala.</p>
-            </div>
-            <span class="product-chevron" aria-hidden="true"></span>
-          </button>
-          <div class="product-panel">
-            <div class="panel-body">
-            <ul class="sub-list">
-              <li><strong>A la medida</strong><span>Diseñados según el espacio y estilo de tu sala.</span></li>
-              <li><strong>Con almacenamiento</strong><span>Espacio integrado para consolas, decoración y orden.</span></li>
-            </ul>
-            <button class="btn btn-primary btn-quote" data-quote="Muebles de TV">Cotizar mueble de TV</button>
-            </div>
-          </div>
-        </article>
-
       </div>
+
+      <p class="also-strip reveal"><strong>También instalamos</strong> pisos SPC, lambrín, madera y piedra tecnológica y muebles de TV. <button type="button" class="sol-quote" data-problem="otro">Cotizar otro proyecto <span aria-hidden="true">→</span></button></p>
 
       <!-- En pantalla grande los subproductos se muestran aquí (las tarjetas no se mueven) -->
       <div class="product-detail" id="productDetail" aria-live="polite">
@@ -401,62 +357,26 @@
   </section>
 
   <!-- ============ PROCESO ============ -->
-  <section class="section process" id="proceso">
-    <div class="container">
-      <p class="eyebrow reveal">Cómo trabajamos</p>
-      <h2 class="reveal">De la idea a la instalación, te acompañamos en todo</h2>
-      <ol class="process-steps">
-        <li class="reveal">
-          <span class="step-num">1</span>
-          <h3>Cotización inicial gratis</h3>
-          <p>Cuéntanos tu proyecto por WhatsApp y recibe una cotización inicial sin costo.</p>
-        </li>
-        <li class="reveal">
-          <span class="step-num">2</span>
-          <h3>Visita técnica</h3>
-          <p>Agendamos una visita para tomar medidas exactas y asesorarte en materiales y estilo.</p>
-        </li>
-        <li class="reveal">
-          <span class="step-num">3</span>
-          <h3>Fabricación a la medida</h3>
-          <p>Fabricamos tu pedido con materiales de calidad, exacto a las medidas de tu espacio.</p>
-        </li>
-        <li class="reveal">
-          <span class="step-num">4</span>
-          <h3>Instalación profesional</h3>
-          <p>Nuestro equipo instala con acabados limpios y te explica el cuidado de tu producto.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
   <!-- ============ PROYECTOS / TESTIMONIOS ============ -->
   <section class="section projects" id="proyectos">
     <div class="container">
-      <p class="eyebrow reveal">Casos de éxito</p>
+      <p class="eyebrow reveal">Obras de Kahome</p>
       <h2 class="reveal">Espacios que ya transformamos</h2>
 
-      <div class="project-grid">
-        <!-- REEMPLAZAR: fotos y descripciones de proyectos reales de Kahome -->
-        <figure class="project-card reveal">
-          <div class="project-visual project-visual--a" aria-hidden="true"></div>
+      <div class="project-grid project-grid--two">
+        <!-- Fotos confirmadas por Karla como obras de Kahome (aprendizajes 2026-11-18). Agregar más solo si son obras propias. -->
+        <figure class="project-card project-card--photo reveal">
+          <img src="assets/obra-sala-cortina-ondulada.jpg" alt="Sala con cortina de onda perfecta y sheer instalada por Kahome" width="900" height="1125" loading="lazy" decoding="async">
           <figcaption>
-            <h3>Recámara con blackout motorizado</h3>
-            <p>Descanso total: oscuridad completa y control desde el celular.</p>
+            <h3>Sala con cortina de onda perfecta</h3>
+            <p>Cortina con caída en ondas y sheer para filtrar la luz del ventanal.</p>
           </figcaption>
         </figure>
-        <figure class="project-card reveal">
-          <div class="project-visual project-visual--b" aria-hidden="true"></div>
+        <figure class="project-card project-card--photo reveal">
+          <img src="assets/obra-ventanal-jardin-persiana.jpg" alt="Persiana enrollable en un ventanal hacia el jardín, instalada por Kahome" width="900" height="1125" loading="lazy" decoding="async">
           <figcaption>
-            <h3>Sala con piso SPC efecto madera</h3>
-            <p>La calidez de la madera, resistente a la humedad del trópico.</p>
-          </figcaption>
-        </figure>
-        <figure class="project-card reveal">
-          <div class="project-visual project-visual--c" aria-hidden="true"></div>
-          <figcaption>
-            <h3>Recámara con papel tapiz de textura</h3>
-            <p>Un acento con carácter, instalado en un solo día.</p>
+            <h3>Ventanal al jardín con persiana enrollable</h3>
+            <p>Sombra cuando pega el sol y la vista completa al subirla.</p>
           </figcaption>
         </figure>
       </div>
@@ -518,36 +438,7 @@
         </blockquote>
       </div>
 
-      <p class="review-cta reveal"><a href="https://maps.app.goo.gl/dJadkimDuMhJVmNC7" target="_blank" rel="noopener">Lee todas nuestras reseñas en Google</a> · ¿Ya eres cliente? <a href="https://g.page/r/CW_ckJtFS6PMEBM/review" target="_blank" rel="noopener">Déjanos la tuya</a> ⭐</p>
-    </div>
-  </section>
-
-  <!-- ============ FAQ ============ -->
-  <section class="section faq" id="faq">
-    <div class="container container--narrow">
-      <p class="eyebrow reveal">Preguntas frecuentes</p>
-      <h2 class="reveal">Resolvemos tus dudas</h2>
-
-      <details class="faq-item reveal">
-        <summary>¿La cotización es gratis?</summary>
-        <p>Sí. La cotización inicial por WhatsApp es totalmente gratis: nos cuentas tu proyecto, medidas aproximadas y el producto que te interesa, y te damos un estimado sin compromiso.</p>
-      </details>
-      <details class="faq-item reveal">
-        <summary>¿La visita técnica tiene costo?</summary>
-        <p>La visita técnica para toma de medidas exactas tiene un costo que se informa al agendar y se bonifica al confirmar tu proyecto con nosotros.</p>
-      </details>
-      <details class="faq-item reveal">
-        <summary>¿Cuánto tardan la fabricación y la instalación?</summary>
-        <p>Depende del producto y las medidas, pero la mayoría de los proyectos se fabrican e instalan en pocos días. Al cotizar te damos una fecha estimada clara.</p>
-      </details>
-      <details class="faq-item reveal">
-        <summary>¿En qué zonas trabajan?</summary>
-        <p>Atendemos toda Mérida y sus alrededores, incluidos Progreso y Chicxulub. Si estás en otra zona de Yucatán, escríbenos y lo revisamos.</p>
-      </details>
-      <details class="faq-item reveal">
-        <summary>¿Qué formas de pago aceptan?</summary>
-        <p>Aceptamos transferencia y efectivo. Pregúntanos por las opciones disponibles al confirmar tu proyecto.</p>
-      </details>
+      <p class="review-cta reveal"><a href="https://maps.app.goo.gl/dJadkimDuMhJVmNC7" target="_blank" rel="noopener">Lee todas nuestras reseñas en Google</a> · ¿Ya eres cliente? <a href="https://g.page/r/CW_ckJtFS6PMEBM/review" target="_blank" rel="noopener">Déjanos la tuya</a></p>
     </div>
   </section>
 
@@ -555,47 +446,146 @@
   <section class="section contact" id="contacto">
     <div class="container contact-grid">
       <div class="contact-info">
-        <p class="eyebrow reveal">Contacto</p>
-        <h2 class="reveal">Cuéntanos tu proyecto</h2>
-        <p class="section-sub reveal">Llena el formulario y te atendemos directo por WhatsApp, o escríbenos por tu red favorita.</p>
+        <p class="eyebrow reveal">Cotización gratis</p>
+        <h2 class="reveal">Cuéntanos qué quieres resolver</h2>
+        <p class="section-sub reveal">Contesta 4 preguntas rápidas y te llega una cotización inicial por WhatsApp. La visita y la medición son sin costo.</p>
+
+        <!-- REEMPLAZAR: confirmar con Karla la promesa de tiempo de respuesta antes de publicar -->
+        <div class="contact-promise reveal">
+          <span class="promise-dot" aria-hidden="true"></span>
+          <div><strong>Te contestamos el mismo día hábil</strong><small>Lunes a viernes, de 10:00 a 18:00 h</small></div>
+        </div>
+
+        <ol class="contact-next reveal" aria-label="Qué pasa después de enviar">
+          <li><span>1</span><div><strong>Cotización inicial</strong>Con tus medidas aproximadas te damos un rango de precio.</div></li>
+          <li><span>2</span><div><strong>Visita técnica</strong>Medimos exacto y te mostramos muestras en tu espacio.</div></li>
+          <li><span>3</span><div><strong>Confirmas tu pedido</strong>Con el anticipo apartamos tu fecha de instalación.</div></li>
+          <li><span>4</span><div><strong>Instalación</strong>A la medida, con acabados limpios.</div></li>
+        </ol>
 
         <ul class="contact-channels reveal">
           <li><a href="#" data-wa-link class="channel channel--wa">WhatsApp</a></li>
           <li><a href="tel:+529993929306" class="channel">Llamar · 999 392 9306</a></li>
-          <li><a href="https://www.facebook.com/KaHomeMX/" target="_blank" rel="noopener" class="channel">Facebook</a></li>
-          <li><a href="https://www.instagram.com/kahomemx/" target="_blank" rel="noopener" class="channel">Instagram</a></li>
-          <li><a href="https://maps.app.goo.gl/dJadkimDuMhJVmNC7" target="_blank" rel="noopener" class="channel">Google Maps</a></li>
         </ul>
-
       </div>
 
-      <form class="contact-form reveal" id="contactForm" novalidate>
-        <div class="field">
-          <label for="fNombre">Nombre</label>
-          <input type="text" id="fNombre" name="nombre" placeholder="Tu nombre" required autocomplete="name">
+      <form class="contact-form quote-form reveal" id="contactForm" novalidate>
+        <div class="q-progress" aria-live="polite">
+          <div class="q-progress-top"><span id="qStepLabel">Paso 1 de 4</span><span id="qStepName">Qué resolver</span></div>
+          <div class="q-bar"><i id="qBar"></i></div>
         </div>
-        <div class="field">
-          <label for="fTelefono">Teléfono</label>
-          <input type="tel" id="fTelefono" name="telefono" placeholder="Ej. 999 123 4567" autocomplete="tel">
-        </div>
-        <fieldset class="field field--checks">
-          <legend>Productos de interés <span class="legend-hint">(elige uno o varios)</span></legend>
-          <div class="check-grid" id="productChecks">
-            <label class="check-pill"><input type="checkbox" name="producto" value="Cortinas tradicionales"><span>Cortinas tradicionales</span></label>
-            <label class="check-pill"><input type="checkbox" name="producto" value="Persianas enrollables"><span>Persianas enrollables</span></label>
-            <label class="check-pill"><input type="checkbox" name="producto" value="Papel tapiz"><span>Papel tapiz</span></label>
-            <label class="check-pill"><input type="checkbox" name="producto" value="Pisos SPC"><span>Pisos SPC</span></label>
-            <label class="check-pill"><input type="checkbox" name="producto" value="Madera y piedra tecnológica"><span>Madera y piedra tecnológica</span></label>
-            <label class="check-pill"><input type="checkbox" name="producto" value="Muebles de TV"><span>Muebles de TV</span></label>
-            <label class="check-pill"><input type="checkbox" name="producto" value="Aún no lo decido"><span>Aún no lo decido</span></label>
+
+        <!-- Paso 1 -->
+        <fieldset class="q-step" data-name="Qué resolver">
+          <legend class="q-title" tabindex="-1">¿Qué quieres resolver?</legend>
+          <p class="q-hint">Puedes elegir varias.</p>
+          <div class="q-tiles">
+            <label class="q-tile"><input type="checkbox" name="problema" value="sol"><span><b>Sol y calor de la tarde</b><small>Persiana screen UV, blackout térmico</small></span></label>
+            <label class="q-tile"><input type="checkbox" name="problema" value="oscuro"><span><b>Dormir en oscuridad total</b><small>Blackout enrollable o cortina</small></span></label>
+            <label class="q-tile"><input type="checkbox" name="problema" value="privacidad"><span><b>Privacidad sin perder luz</b><small>Sheer elegance, screen, visillo</small></span></label>
+            <label class="q-tile"><input type="checkbox" name="problema" value="piso"><span><b>Piso nuevo o con humedad</b><small>Piso SPC 100% impermeable</small></span></label>
+            <label class="q-tile"><input type="checkbox" name="problema" value="muro"><span><b>Renovar un muro</b><small>Papel tapiz texturizado o liso</small></span></label>
+            <label class="q-tile"><input type="checkbox" name="problema" value="otro"><span><b>Otro proyecto</b><small>Lambrín, madera y piedra, mueble de TV</small></span></label>
+          </div>
+          <p class="q-error" id="qErrProblema" hidden>Elige al menos una opción para continuar.</p>
+        </fieldset>
+
+        <!-- Paso 2 -->
+        <fieldset class="q-step" data-name="Espacio">
+          <legend class="q-title" tabindex="-1">¿En qué espacio?</legend>
+          <p class="q-hint">Así sabemos qué tela, color y mecanismo recomendarte.</p>
+          <div class="check-grid">
+            <label class="check-pill"><input type="radio" name="espacio" value="Recámara"><span>Recámara</span></label>
+            <label class="check-pill"><input type="radio" name="espacio" value="Sala / comedor"><span>Sala / comedor</span></label>
+            <label class="check-pill"><input type="radio" name="espacio" value="Terraza o exterior"><span>Terraza o exterior</span></label>
+            <label class="check-pill"><input type="radio" name="espacio" value="Oficina"><span>Oficina</span></label>
+            <label class="check-pill"><input type="radio" name="espacio" value="Airbnb / depto. en renta"><span>Airbnb / depto. en renta</span></label>
+            <label class="check-pill"><input type="radio" name="espacio" value="Local o recepción"><span>Local o recepción</span></label>
+            <label class="check-pill"><input type="radio" name="espacio" value="Proyecto completo / edificio"><span>Proyecto completo / edificio</span></label>
           </div>
         </fieldset>
-        <div class="field">
-          <label for="fMensaje">Cuéntanos más</label>
-          <textarea id="fMensaje" name="mensaje" rows="4" placeholder="Ej. Necesito persianas para 3 ventanas de mi sala…"></textarea>
+
+        <!-- Paso 3 -->
+        <fieldset class="q-step" data-name="Medidas">
+          <legend class="q-title" tabindex="-1">Medidas aproximadas</legend>
+          <p class="q-hint">Más o menos está bien. La medida exacta la tomamos en la visita.</p>
+
+          <p class="q-note" id="qMedidasVacio" hidden>Elige en el paso 1 qué quieres resolver para pedirte las medidas correctas.</p>
+
+          <div class="q-block" data-medida="ventanas">
+            <p class="q-block-title">Ventanas <small>ancho × alto en metros</small></p>
+            <div class="q-howto">
+              <svg viewBox="0 0 96 80" aria-hidden="true"><rect x="18" y="14" width="60" height="52"/><path d="M18 8h60M18 5v6M78 5v6M86 14v52M83 14h6M83 66h6"/><text x="36" y="5">ancho</text><text x="0" y="44">alto</text></svg>
+              <p>Mide el ancho y el alto del hueco de la ventana, de pared a pared. Si la quieres por fuera del marco, súmale unos 10 cm por lado.</p>
+            </div>
+            <div id="qVentanas">
+              <div class="q-win">
+                <span class="q-win-n">1</span>
+                <input type="text" inputmode="decimal" class="q-ancho" placeholder="Ancho" aria-label="Ancho de la ventana 1">
+                <span class="q-x" aria-hidden="true">×</span>
+                <input type="text" inputmode="decimal" class="q-alto" placeholder="Alto" aria-label="Alto de la ventana 1">
+                <button type="button" class="q-del" aria-label="Quitar ventana 1" hidden>×</button>
+              </div>
+            </div>
+            <button type="button" class="q-link" id="qAddWin" hidden>+ Agregar otra ventana</button>
+          </div>
+
+          <div class="q-block field" data-medida="piso">
+            <label for="qPiso">Piso: metros cuadrados aproximados</label>
+            <input type="text" id="qPiso" inputmode="decimal" placeholder="Ej. 45 (una sala de 5 × 9 m)">
+          </div>
+          <div class="q-block field" data-medida="muro">
+            <label for="qMuro">Muro: ancho × alto aproximado</label>
+            <input type="text" id="qMuro" placeholder="Ej. 4 × 2.70 m">
+          </div>
+          <div class="q-block field" data-medida="otro">
+            <label for="qOtro">Cuéntanos qué necesitas y las medidas aproximadas</label>
+            <textarea id="qOtro" rows="3" placeholder="Ej. lambrín en un muro de 4 × 2.70 m en la terraza"></textarea>
+          </div>
+
+          <label class="q-nomeasure"><input type="checkbox" id="qSinMedidas"><span><b>No tengo medidas.</b> Prefiero que vengan a medir.</span></label>
+        </fieldset>
+
+        <!-- Paso 4 -->
+        <fieldset class="q-step" data-name="Tus datos">
+          <legend class="q-title" tabindex="-1">¿A quién atendemos?</legend>
+          <div class="field">
+            <label for="fNombre">Tu nombre</label>
+            <input type="text" id="fNombre" name="nombre" placeholder="Ej. Ana López" autocomplete="name">
+            <p class="q-error" id="qErrNombre" hidden>Escribe tu nombre para enviar.</p>
+          </div>
+          <div class="field">
+            <label for="qColonia">Colonia o fraccionamiento <span class="legend-hint">(para agendar la visita)</span></label>
+            <input type="text" id="qColonia" list="qColonias" placeholder="Ej. Montebello, Cholul, Centro…" autocomplete="off">
+            <!-- Zonas donde trabaja Kahome (CLAUDE.md de KahomeMX); ajustar con las colonias de donde más escriben -->
+            <datalist id="qColonias">
+              <option value="Temozón Norte"><option value="Cholul"><option value="Conkal"><option value="Montebello">
+              <option value="Altabrisa"><option value="Francisco de Montejo"><option value="Santa Gertrudis Copó"><option value="Dzityá">
+              <option value="Sodzil Norte"><option value="San Ramón Norte"><option value="Chicxulub Puerto"><option value="Progreso">
+              <option value="Centro"><option value="García Ginerés"><option value="Itzimná">
+            </datalist>
+          </div>
+          <div class="field">
+            <span class="q-label">¿Cuándo te acomoda la visita? <span class="legend-hint">(opcional)</span></span>
+            <div class="check-grid">
+              <label class="check-pill"><input type="radio" name="visita" value="Entre semana, mañana"><span>Entre semana, mañana</span></label>
+              <label class="check-pill"><input type="radio" name="visita" value="Entre semana, tarde"><span>Entre semana, tarde</span></label>
+              <!-- CONFIRMAR con Karla si hay visitas en sábado (el horario publicado es de lunes a viernes) -->
+              <label class="check-pill"><input type="radio" name="visita" value="Me da igual"><span>Me da igual</span></label>
+            </div>
+          </div>
+          <details class="q-preview">
+            <summary>Ver el mensaje que se enviará</summary>
+            <pre id="qPreview"></pre>
+          </details>
+        </fieldset>
+
+        <div class="q-nav">
+          <button type="button" class="btn btn-ghost" id="qBack">Atrás</button>
+          <button type="button" class="btn btn-primary" id="qNext">Siguiente</button>
+          <button type="submit" class="btn btn-wa" id="qSend">Enviar por WhatsApp</button>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar por WhatsApp</button>
-        <p class="form-note">Al enviar se abrirá WhatsApp con tu mensaje listo — ahí puedes adjuntar fotos de tu espacio. No guardamos tus datos.</p>
+        <p class="form-note">Al continuar se abrirá WhatsApp con tu mensaje listo; ahí puedes adjuntar fotos de tu espacio. Esta web no guarda el contenido del formulario ni lo incluye en los eventos del píxel de Meta.</p>
       </form>
 
       <div class="location reveal" id="ubicacion">
@@ -611,6 +601,35 @@
     </div>
   </section>
 
+  <!-- ============ FAQ ============ -->
+  <section class="section faq" id="faq">
+    <div class="container container--narrow">
+      <p class="eyebrow reveal">Preguntas frecuentes</p>
+      <h2 class="reveal">Resolvemos tus dudas</h2>
+
+      <details class="faq-item reveal">
+        <summary>¿La cotización es gratis?</summary>
+        <p>Sí. La cotización inicial por WhatsApp es totalmente gratis: nos cuentas tu proyecto, medidas aproximadas y el producto que te interesa, y te damos un estimado sin compromiso.</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>¿La visita técnica tiene costo?</summary>
+        <p>No. La visita para tomar medidas exactas y mostrarte muestras en tu espacio es sin costo.</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>¿Cuánto tardan la fabricación y la instalación?</summary>
+        <p>Depende del producto, la tela y las medidas. Al confirmar tu pedido te damos la fecha de instalación por escrito.</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>¿En qué zonas trabajan?</summary>
+        <p>Atendemos el norte de Mérida, Temozón, Cholul, Conkal, Progreso y Chicxulub. Si estás en otra zona de Mérida o Yucatán, escríbenos y lo revisamos.</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>¿Qué formas de pago aceptan?</summary>
+        <p>Aceptamos transferencia y efectivo. Pregúntanos por las opciones disponibles al confirmar tu proyecto.</p>
+      </details>
+    </div>
+  </section>
+
 </main>
 
 <footer class="footer">
@@ -623,6 +642,7 @@
       <a href="https://maps.app.goo.gl/dJadkimDuMhJVmNC7" target="_blank" rel="noopener">Google Maps</a>
     </nav>
     <p class="footer-copy">© <span id="year">2026</span> Kahome Decoración · Mérida, Yucatán</p>
+    <button type="button" class="marketing-settings" id="marketingSettings">Preferencias de publicidad</button>
   </div>
 </footer>
 
@@ -634,6 +654,19 @@
   <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.33 4.95L2 22l5.3-1.39c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01A9.84 9.84 0 0 0 12.04 2zm0 18.15h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.25-.64.8-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
 </a>
 
-<script src="script.js"></script>
+<section class="marketing-consent" id="marketingConsent" aria-labelledby="marketingTitle" hidden>
+  <h2 id="marketingTitle">Tu privacidad</h2>
+  <p>Con tu permiso, usamos el píxel de Meta para medir visitas y clics a WhatsApp y mejorar nuestra publicidad. Puedes rechazarlo y cotizar igualmente.</p>
+  <details>
+    <summary>Qué compartimos y cómo cambiar tu decisión</summary>
+    <p>Si aceptas, Meta recibe eventos de navegación, la URL visitada y datos técnicos como IP, navegador e identificadores de cookies; puede asociarlos con tu cuenta para medir y personalizar anuncios. No incluimos tu nombre, teléfono ni mensaje del formulario en estos eventos. Guardamos tu elección durante 180 días. Puedes retirarla en “Preferencias de publicidad”, al pie de la página. Esto detiene nuevos eventos, pero no elimina los ya enviados. Consulta la <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">política de privacidad de Meta</a>.</p>
+  </details>
+  <div class="marketing-actions">
+    <button type="button" id="marketingReject">Rechazar</button>
+    <button type="button" id="marketingAccept">Aceptar publicidad</button>
+  </div>
+</section>
+<script src="tracking.js"></script>
+<script src="script2.js"></script>
 </body>
 </html>
