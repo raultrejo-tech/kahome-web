@@ -46,7 +46,8 @@
   text-decoration: underline;
   cursor: pointer;
 }
-.marketing-consent-open .wa-float, .marketing-consent-open .call-float { visibility: hidden; }
+.marketing-consent-open .wa-float { bottom: calc(1.1rem + var(--consent-h, 0px)); }
+.marketing-consent-open .call-float { bottom: calc(1.1rem + 56px + 0.8rem + var(--consent-h, 0px)); }
 @media (max-width: 480px) {
   .marketing-actions { flex-wrap: nowrap; }
   .marketing-actions button { flex: 1 1 0; min-width: 0; }

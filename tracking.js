@@ -21,10 +21,19 @@
     return null;
   }
 
+  function syncBannerHeight() {
+    const h = banner.hidden ? 0 : banner.offsetHeight;
+    if (document.body.style) document.body.style.setProperty("--consent-h", `${h}px`);
+  }
+
   function showBanner(show) {
     banner.hidden = !show;
     document.body.classList.toggle("marketing-consent-open", show);
+    syncBannerHeight();
   }
+
+  if (typeof ResizeObserver === "function") new ResizeObserver(syncBannerHeight).observe(banner);
+  window.addEventListener("resize", syncBannerHeight);
 
   function loadPixel() {
     if (!consent || !/^\d{10,20}$/.test(PIXEL_ID)) return;
