@@ -1,7 +1,7 @@
 /* Meta Pixel is loaded only after an explicit marketing consent. */
 (() => {
   "use strict";
-  const PIXEL_ID = ""; // Set only after the Kahome web pixel is confirmed.
+  const PIXEL_ID = "1837394670614069"; // Kahome Web (portfolio Kahome mx, KahomeMX Ads), creado el 22 nov 2026.
   const CONSENT_KEY = "kahome.marketing-consent.v1";
   const MAX_AGE = 180 * 24 * 60 * 60 * 1000;
   const banner = document.getElementById("marketingConsent");
