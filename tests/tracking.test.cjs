@@ -41,24 +41,25 @@ function setup({ saved = null, blocked = false, configured = true } = {}) {
   };
 }
 
-test('no Meta script or events before consent; reject persists', () => {
+test('without a saved choice: pixel loads once, banner informs, Entendido closes it', () => {
   const ctx = setup();
   assert.equal(ctx.elements.get('marketingConsent').hidden, false);
-  ctx.waClick(); ctx.form();
-  assert.equal(ctx.scripts.length, 0);
-  assert.equal(ctx.window.fbq, undefined);
-  ctx.click('marketingReject');
-  assert.equal(JSON.parse(ctx.storage.get(key)).accepted, false);
-  assert.equal(ctx.scripts.length, 0);
+  assert.equal(ctx.elements.get('marketingAccept').textContent, 'Entendido');
+  assert.equal(ctx.scripts.length, 1);
+  assert.equal(ctx.scripts[0].src, 'https://connect.facebook.net/en_US/fbevents.js');
+  ctx.click('marketingAccept');
+  assert.equal(ctx.elements.get('marketingConsent').hidden, true);
+  assert.equal(JSON.parse(ctx.storage.get(key)).accepted, true);
+  assert.equal(ctx.scripts.length, 1);
+  assert.equal(ctx.queue().filter((item) => item[2] === 'PageView').length, 1);
 });
 
-test('accept initializes once, disables automatic collection, sends only named events', () => {
+test('initializes once, disables automatic collection, sends only named events', () => {
   const ctx = setup();
   ctx.click('marketingAccept');
   ctx.click('marketingAccept');
   ctx.waClick(true); ctx.waClick(false); ctx.form();
   assert.equal(ctx.scripts.length, 1);
-  assert.equal(ctx.scripts[0].src, 'https://connect.facebook.net/en_US/fbevents.js');
   const q = ctx.queue();
   assert.deepEqual(q.find((item) => item[0] === 'set'), ['set', 'autoConfig', false, pixelId]);
   assert.deepEqual(q.find((item) => item[0] === 'init'), ['init', pixelId]);
@@ -70,18 +71,23 @@ test('accept initializes once, disables automatic collection, sends only named e
   ]);
 });
 
-test('revoke stops subsequent events and clears Meta cookies', () => {
+test('opt-out stops events, clears Meta cookies, persists and can be undone', () => {
   const ctx = setup();
-  ctx.click('marketingAccept');
-  ctx.click('marketingSettings');
-  assert.equal(ctx.elements.get('marketingConsent').hidden, false);
   ctx.click('marketingReject');
+  assert.equal(JSON.parse(ctx.storage.get(key)).accepted, false);
+  assert.equal(ctx.elements.get('marketingConsent').hidden, true);
   const length = ctx.queue().length;
   ctx.form(); ctx.waClick();
   assert.equal(ctx.queue().length, length);
   assert.deepEqual(ctx.queue().at(-1), ['consent', 'revoke']);
   assert.ok(ctx.cookies.some((value) => value.startsWith('_fbp=; Max-Age=0;')));
   assert.ok(ctx.cookies.some((value) => value.startsWith('_fbc=; Max-Age=0;')));
+  ctx.click('marketingSettings');
+  assert.equal(ctx.elements.get('marketingConsent').hidden, false);
+  assert.equal(ctx.elements.get('marketingAccept').textContent, 'Activar publicidad');
+  ctx.click('marketingAccept');
+  ctx.waClick();
+  assert.deepEqual(ctx.queue().at(-1), ['trackSingleCustom', pixelId, 'WhatsAppClick', { source: 'website_link' }]);
 });
 
 test('saved choices, expired/malformed choices, blocked storage, and unconfigured pixel', () => {
@@ -90,22 +96,24 @@ test('saved choices, expired/malformed choices, blocked storage, and unconfigure
     assert.equal(ctx.elements.get('marketingConsent').hidden, true);
     assert.equal(ctx.scripts.length, accepted ? 1 : 0);
   }
-  for (const saved of ['broken', JSON.stringify({ accepted: true, savedAt: 0 }), JSON.stringify({ accepted: true, savedAt: Date.now() + 86400000 })]) {
+  for (const saved of ['broken', JSON.stringify({ accepted: false, savedAt: 0 }), JSON.stringify({ accepted: false, savedAt: Date.now() + 86400000 })]) {
     const ctx = setup({ saved });
-    assert.equal(ctx.scripts.length, 0);
+    assert.equal(ctx.scripts.length, 1);
     assert.equal(ctx.elements.get('marketingConsent').hidden, false);
   }
   const blocked = setup({ blocked: true });
-  blocked.click('marketingAccept');
   assert.equal(blocked.scripts.length, 1);
+  blocked.click('marketingReject');
+  const length = blocked.queue().length;
+  blocked.waClick();
+  assert.equal(blocked.queue().length, length);
   const unconfigured = setup({ configured: false });
   unconfigured.click('marketingAccept');
   assert.equal(unconfigured.scripts.length, 0);
 });
 
-test('a withdrawal in another tab is respected', () => {
+test('an opt-out in another tab is respected', () => {
   const ctx = setup();
-  ctx.click('marketingAccept');
   ctx.storage.set(key, JSON.stringify({ accepted: false, savedAt: Date.now() }));
   ctx.sync();
   const length = ctx.queue().length;
@@ -115,8 +123,8 @@ test('a withdrawal in another tab is respected', () => {
 });
 
 test('form integration occurs after validation and does not include form data', () => {
-  const formSource = readFileSync(require('node:path').join(__dirname, '../script.js'), 'utf8');
-  assert.ok(formSource.indexOf('if (!valido) return;') < formSource.indexOf('document.dispatchEvent(new Event("kahome:whatsapp-form"))'));
+  const formSource = readFileSync(require('node:path').join(__dirname, '../script2.js'), 'utf8');
+  assert.ok(formSource.indexOf('if (!validar(step)) return;') < formSource.indexOf('document.dispatchEvent(new Event("kahome:whatsapp-form"))'));
   assert.equal((formSource.match(/kahome:whatsapp-form/g) || []).length, 1);
   assert.ok(!source.includes('form.nombre') && !source.includes('form.telefono') && !source.includes('form.mensaje'));
 });

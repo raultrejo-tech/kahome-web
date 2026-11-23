@@ -1,4 +1,6 @@
-/* Meta Pixel is loaded only after an explicit marketing consent. */
+/* Meta Pixel: aviso informativo (México). El píxel se activa al entrar, salvo que
+   la persona elija "No usar publicidad"; esa decisión se respeta y se puede cambiar
+   desde "Preferencias de publicidad" al pie de la página. */
 (() => {
   "use strict";
   const PIXEL_ID = "1837394670614069"; // Kahome Web (portfolio Kahome mx, KahomeMX Ads), creado el 22 nov 2026.
@@ -6,6 +8,7 @@
   const MAX_AGE = 180 * 24 * 60 * 60 * 1000;
   const banner = document.getElementById("marketingConsent");
   const settings = document.getElementById("marketingSettings");
+  const acceptButton = document.getElementById("marketingAccept");
   let consent = false;
   let initialized = false;
   let pageViewed = false;
@@ -27,6 +30,8 @@
   }
 
   function showBanner(show) {
+    // Si la publicidad está apagada, el botón principal la vuelve a activar.
+    acceptButton.textContent = consent ? "Entendido" : "Activar publicidad";
     banner.hidden = !show;
     document.body.classList.toggle("marketing-consent-open", show);
     syncBannerHeight();
@@ -101,7 +106,7 @@
     window.fbq("trackSingleCustom", PIXEL_ID, "WhatsAppClick", { source });
   }
 
-  document.getElementById("marketingAccept").addEventListener("click", () => saveConsent(true));
+  acceptButton.addEventListener("click", () => saveConsent(true));
   document.getElementById("marketingReject").addEventListener("click", () => saveConsent(false));
   settings.addEventListener("click", () => {
     returnFocus = settings;
@@ -118,11 +123,12 @@
   window.addEventListener("storage", (event) => {
     if (event.key !== CONSENT_KEY && event.key !== null) return;
     const choice = readConsent();
-    applyConsent(choice === true);
+    applyConsent(choice !== false);
     showBanner(choice === null);
   });
 
+  // Sin decisión guardada: se activa y se muestra el aviso. Solo "No usar publicidad" lo apaga.
   const savedChoice = readConsent();
-  applyConsent(savedChoice === true);
+  applyConsent(savedChoice !== false);
   showBanner(savedChoice === null);
 })();

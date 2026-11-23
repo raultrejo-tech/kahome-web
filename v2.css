@@ -348,3 +348,6 @@
 .footer-links { flex-wrap: wrap; justify-content: center; }
 .footer-links a.footer-review { color: var(--sand); font-weight: 500; }
 .footer-links a.footer-review:hover { color: var(--cream); }
+.form-note a { color: inherit; text-decoration: underline; }
+.footer-privacy { color: rgba(237, 232, 220, 0.85); font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
+.footer-privacy:hover { color: var(--sand); }

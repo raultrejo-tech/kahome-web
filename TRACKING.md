@@ -1,12 +1,13 @@
 # Meta Pixel
 
-`tracking.js` loads Meta only after marketing consent. Configure the verified
+`tracking.js` loads Meta on page entry with an informative notice (Mexican
+notice-and-opt-out model); it stays off only if the visitor opts out. Configure the verified
 Kahome web pixel ID in `PIXEL_ID`; an empty ID deliberately sends nothing.
 An app ID is not a web pixel ID.
 
 ## Events
 
-- `PageView`: once per page load, after consent.
+- `PageView`: once per page load, unless the visitor opted out.
 - `WhatsAppClick`: custom event on outbound WhatsApp links and validated quote
   form submission. `source` is limited to `floating_button`, `website_link`, or
   `quote_form`. No name, phone, free-text message, or WhatsApp destination URL is
@@ -18,24 +19,25 @@ An app ID is not a web pixel ID.
 
 ## Consent and privacy
 
-Accept/reject choices expire after 180 days and can be changed from the footer.
-No Meta script or no-JavaScript tracking image loads before acceptance.
-Revocation stops future events and expires first-party `_fbp` and `_fbc`
-cookies; it does not erase past events or third-party cookies.
+The banner informs on entry ("Entendido" / "No usar publicidad") and links to
+`aviso-de-privacidad.html`. With no saved choice the pixel loads immediately.
+Choices expire after 180 days (the banner then shows again) and can be changed
+from the footer. Opting out stops future events and expires first-party `_fbp`
+and `_fbc` cookies; it does not erase past events or third-party cookies.
 Automatic configuration is disabled before initialization and no advanced
 matching data is supplied. Keep automatic matching and automatic events off
 in Events Manager as well. Meta still receives technical browser/network data
-and page URLs after consent. Never put personal information into page URLs.
+and page URLs unless the visitor opts out. Never put personal information into page URLs.
 
-The on-page measurement disclosure is not a complete business privacy policy.
-The business should review its broader privacy notice separately.
+The full privacy notice (LFPDPPP) is `aviso-de-privacidad.html`; keep its
+section 6 in sync with this behavior.
 
 ## Verification
 
 Run `node --test tests/tracking.test.cjs`.
 In Meta Events Manager, select the confirmed web pixel, open Test Events,
-visit the website, accept advertising, and check PageView and WhatsAppClick.
-Rejecting must leave the site and quote flow usable without Meta events.
+visit the website and check PageView and WhatsAppClick.
+Opting out must leave the site and quote flow usable without Meta events.
 Use separate browser sessions for accept/reject tests, and test mobile too.
 
 ## Reference

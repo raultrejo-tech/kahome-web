@@ -33,6 +33,17 @@
   cursor: pointer;
 }
 .marketing-actions button:hover { background: var(--cream); }
+.marketing-actions { align-items: center; }
+#marketingAccept { background: var(--ink); color: var(--white); }
+#marketingAccept:hover { background: #34302a; }
+.marketing-actions .marketing-optout {
+  flex: 0 1 auto;
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.marketing-actions .marketing-optout:hover { background: transparent; color: var(--ink-soft); }
 .marketing-actions button:focus-visible, .marketing-settings:focus-visible {
   outline: 3px solid #187a57;
   outline-offset: 3px;
@@ -51,4 +62,5 @@
 @media (max-width: 480px) {
   .marketing-actions { flex-wrap: nowrap; }
   .marketing-actions button { flex: 1 1 0; min-width: 0; }
+  .marketing-actions .marketing-optout { flex: 0 1 auto; }
 }
