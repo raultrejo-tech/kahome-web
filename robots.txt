@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.kahome.mx/sitemap.xml
+Sitemap: https://kahome.com.mx/sitemap.xml
