@@ -45,3 +45,16 @@ Use separate browser sessions for accept/reject tests, and test mobile too.
 Meta's official template documents the consent, autoConfig and per-pixel event
 commands used here:
 https://github.com/facebook/GoogleTagManager-WebTemplate-For-FacebookPixel/blob/main/template.tpl
+
+## Origen del visitante → mensaje de WhatsApp (`origen.js`)
+
+`origen.js` reads `utm_source`/`utm_medium`, else `gclid`/`gbraid`/`wbraid` (Google Ads) or
+`fbclid` (Meta), else the referrer, and sets `window.KAHOME_ORIGEN`. The first source of the
+visit is kept in `sessionStorage` (`kahome.origen.v1`, wrapped in try/catch). `script2.js`
+starts both WhatsApp messages (floating button and quote form) with a natural phrase:
+«Vi su anuncio en Google», «Los encontré en Google», «Los encontré en Google Maps»,
+«Vi su anuncio en Facebook/Instagram», «Los vi en Instagram», «Los vi en redes»,
+«Vi su folleto», «Recibí su correo», or «Vi su página» (direct). Nothing is sent to
+Meta or Google; it only changes the text the visitor can edit before sending.
+UTM naming convention: `kahome-oficina/marketing/2026-11-23-utm-y-seguimiento.md`.
+Run `node --test tests/origen.test.cjs`.

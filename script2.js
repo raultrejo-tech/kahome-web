@@ -3,9 +3,12 @@
    ============================================================ */
 
 /* ---- CONFIGURACIÓN — edita aquí los datos reales ---- */
+// frase según de dónde llegó el visitante (origen.js); si no cargó, «Vi su página»
+const FRASE_ORIGEN = (window.KAHOME_ORIGEN && window.KAHOME_ORIGEN.frase) || "Vi su página";
+
 const CONFIG = {
   whatsapp: "5219993929306",
-  mensajeDefault: "¡Hola Kahome! Me gustaría recibir más información sobre sus productos.",
+  mensajeDefault: `¡Hola Kahome! ${FRASE_ORIGEN} y me gustaría recibir más información sobre sus productos.`,
 };
 
 const waUrl = (texto) =>
@@ -287,7 +290,7 @@ qVentanas.addEventListener("click", (e) => {
 });
 
 function buildMessage() {
-  const L = ["¡Hola Kahome! Quiero una cotización:", ""];
+  const L = [`¡Hola Kahome! ${FRASE_ORIGEN} y quiero una cotización:`, ""];
   if (productoInteres) L.push(`• Me interesa: ${productoInteres}`);
   L.push(`• Quiero resolver: ${problemasElegidos().map((p) => PROBLEMAS[p].nombre).join(", ") || "—"}`);
   const espacios = valores("espacio");
