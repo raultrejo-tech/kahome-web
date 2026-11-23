@@ -351,3 +351,24 @@
 .form-note a { color: inherit; text-decoration: underline; }
 .footer-privacy { color: rgba(237, 232, 220, 0.85); font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
 .footer-privacy:hover { color: var(--sand); }
+.location-rating { margin-bottom: 0.4rem; }
+.location-rating a { color: var(--ink); text-decoration: none; font-size: 0.95rem; }
+.location-rating a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.location-rating .stars { color: #e7a33e; letter-spacing: 1px; }
+.location-rating strong { font-weight: 600; }
+/* Ubicación: sección propia, separada del cotizador (crema → blanco → crema) */
+.location-section { background: var(--white); }
+.faq { background: var(--cream); }
+.location-phone { color: var(--ink); font-weight: 500; text-decoration: none; }
+.location-phone:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* Datos del showroom con iconos de línea (alineados a la primera línea del texto) */
+.location-details { list-style: none; display: grid; gap: 0.55rem; margin-top: 0.2rem; }
+.location-details li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 0.65rem;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.location-details svg { color: var(--sand-dark); margin-top: 0.2em; }
